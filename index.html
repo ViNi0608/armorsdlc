@@ -6,27 +6,37 @@
   <title>ArmorSDLC</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    body { font-family: 'Segoe UI', sans-serif; }
+    body { font-family: 'Segoe UI', sans-serif; line-height: 1.7; }
     .btn-orange { background-color: #ff6a00; color: white; }
     .btn-orange:hover { background-color: #e65c00; }
-    .toggle-btn { position: fixed; top: 1rem; right: 1rem; z-index: 9999; }
+    .toggle-btn { position: fixed; top: 1rem; right: 1rem; z-index: 1050; }
     section { padding: 60px 0; }
+    header { padding: 80px 0; }
+    [data-bs-theme="dark"] header, [data-bs-theme="dark"] .bg-light {
+      background-color: #212529 !important;
+      color: #f8f9fa !important;
+    }
+    [data-bs-theme="dark"] .card {
+      background-color: #2b2b2b;
+      color: #fff;
+    }
   </style>
 </head>
 <body>
 
-<!-- 🌗 Theme Toggle -->
+<!-- Theme Toggle -->
 <button class="btn btn-outline-secondary toggle-btn" onclick="toggleTheme()">🌓</button>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-body border-bottom sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#"><strong>ArmorSDLC</strong></a>
+    <a class="navbar-brand fw-bold" href="#">ArmorSDLC</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#how">How It Works</a></li>
         <li class="nav-item"><a class="nav-link" href="#why">Why Us</a></li>
@@ -39,61 +49,81 @@
 </nav>
 
 <!-- HERO -->
-<header class="text-center bg-light py-5">
+<header class="text-center bg-light" id="hero">
   <div class="container">
     <h1 class="display-5">Streamlining Application Security from Design to Deployment</h1>
     <p class="lead">Presented by OrgSec — Eliminate the threats before they eliminate you</p>
-    <a href="#how" class="btn btn-orange">See How It Works</a>
+    <a href="#overview" class="btn btn-orange">Explore the Platform</a>
   </div>
 </header>
 
-<!-- ABOUT -->
-<section id="about">
+<!-- PRODUCT OVERVIEW -->
+<section id="overview">
+  <div class="container text-center">
+    <h2 class="mb-4">One Platform. Full Lifecycle Security.</h2>
+    <p class="mb-4 col-md-9 mx-auto">
+      ArmorSDLC helps mid-sized companies integrate security seamlessly across their Software Development Lifecycle (SDLC).
+      Our SaaS platform automates threat modeling, secure code reviews, dynamic testing, and deployment configuration checks.
+    </p>
+    <div class="row text-center">
+      <div class="col-md-3"><strong>Design</strong><p>Automated STRIDE-based threat modeling</p></div>
+      <div class="col-md-3"><strong>Development</strong><p>Static code analysis with auto-fix suggestions</p></div>
+      <div class="col-md-3"><strong>Testing</strong><p>DAST engine + optional manual pentests</p></div>
+      <div class="col-md-3"><strong>Deployment</strong><p>Cloud and server configuration reviews</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section id="about" class="bg-light">
   <div class="container">
     <h2 class="text-center mb-4">The Problem</h2>
     <p class="text-center col-md-10 mx-auto">
-      Mid-sized fintech, healthcare, and SaaS companies face fragmented tools, limited AppSec expertise,
-      slow manual reviews, and compliance pressure — all leading to costly vulnerabilities.
+      Fintech, healthcare, and SaaS companies face fragmented security tools, limited AppSec expertise, slow manual reviews,
+      and regulatory pressure — all leading to expensive post-deployment vulnerabilities.
     </p>
     <div class="row text-center mt-4">
-      <div class="col-md-6"><strong>🔐 Fragmented Tools</strong><p>Disconnected platforms & complexity</p></div>
-      <div class="col-md-6"><strong>👨‍💻 Limited Security Knowledge</strong><p>Developers lack AppSec training</p></div>
-      <div class="col-md-6"><strong>🕒 Manual Effort</strong><p>Delays in threat modeling & code reviews</p></div>
-      <div class="col-md-6"><strong>📜 Compliance Burdens</strong><p>Struggle with PCI, HIPAA, SOC 2</p></div>
+      <div class="col-md-6"><strong>🔐 Fragmented Tools</strong><p>Disconnected platforms increase risk</p></div>
+      <div class="col-md-6"><strong>👨‍💻 Skill Gaps</strong><p>Developers lack deep AppSec training</p></div>
+      <div class="col-md-6"><strong>🕒 Manual Overhead</strong><p>Slow threat modeling & code reviews</p></div>
+      <div class="col-md-6"><strong>📜 Compliance Load</strong><p>PCI, HIPAA, SOC 2 stress security teams</p></div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section id="how" class="bg-light">
+<section id="how">
   <div class="container">
     <h2 class="text-center mb-5">How ArmorSDLC Works</h2>
     <div class="row g-4">
-      <div class="col-md-6"><h5>1. Design Phase</h5><ul><li>Upload app designs (JSON/XML/OTM)</li><li>STRIDE threat modeling</li><li>Get risk analysis & mitigations</li></ul></div>
-      <div class="col-md-6"><h5>2. Code Phase</h5><ul><li>Connect GitHub or upload code</li><li>Detect XSS, SQLi, CSRF and other vulnerabilities</li><li>Auto-fix suggestions with detailed explanation (not merged)</li></ul></div>
-      <div class="col-md-6"><h5>3. Testing Phase</h5><ul><li>Provide URL + creds</li><li>Run custom-built logic-aware DAST engine + optional manual pentest</li><li>Compliance-ready reporting</li></ul></div>
-      <div class="col-md-6"><h5>4. Deployment Phase</h5><ul><li>Scan configs (IAM, S3, servers)</li><li>Hardening & benchmarks</li><li>Ensure secure cloud posture</li></ul></div>
+      <div class="col-md-6"><h5>1. Design Phase</h5><ul><li>Upload app diagrams (JSON/XML/OTM)</li><li>Get STRIDE-based threat modeling</li><li>Receive mitigation suggestions</li></ul></div>
+      <div class="col-md-6"><h5>2. Code Phase</h5><ul><li>Connect GitHub or upload code</li><li>Find XSS, SQLi, CSRF, more</li><li>Get inline auto-fix suggestions</li></ul></div>
+      <div class="col-md-6"><h5>3. Testing Phase</h5><ul><li>DAST scan via hosted app URL</li><li>Test business logic with custom rules</li><li>Manual pentest add-on for critical flows</li></ul></div>
+      <div class="col-md-6"><h5>4. Deployment Phase</h5><ul><li>Scan AWS/GCP/IAM/S3 configurations</li><li>Benchmark against compliance (e.g. PCI)</li></ul></div>
     </div>
   </div>
 </section>
 
 <!-- WHY US -->
-<section id="why">
+<section id="why" class="bg-light">
   <div class="container">
     <h2 class="text-center mb-4">Why ArmorSDLC Stands Out</h2>
+    <p class="text-center col-md-10 mx-auto mb-5 text-muted">
+      Unlike generic scanners or toolkits, ArmorSDLC delivers real developer productivity and security insight—without the overhead.
+    </p>
     <div class="row text-center">
-      <div class="col-md-4"><h6>✅ Full SDLC Coverage</h6><p>From design to deployment</p></div>
-      <div class="col-md-4"><h6>⚙️ Developer-First</h6><p>Auto-fixes & code diff preview</p></div>
-      <div class="col-md-4"><h6>🧠 Custom Logic Engine</h6><p>Beyond traditional scanners</p></div>
-      <div class="col-md-4"><h6>🚀 Workflow Clarity</h6><p>Upload → Analyze → Fix → Deploy</p></div>
-      <div class="col-md-4"><h6>🔒 No Complexity</h6><p>Abstracts security tools into one</p></div>
-      <div class="col-md-4"><h6>🔌 Integrations</h6><p>Works with GitHub, GitLab, Jenkins</p></div>
+      <div class="col-md-4"><h6>✅ Complete SDLC Coverage</h6><p>One tool from design to deployment</p></div>
+      <div class="col-md-4"><h6>⚙️ Dev-Friendly Fixes</h6><p>Pull request suggestions without auto-merging</p></div>
+      <div class="col-md-4"><h6>🧠 Logic-Aware Testing</h6><p>Detects issues most scanners miss</p></div>
+      <div class="col-md-4"><h6>📈 CI/CD Integration</h6><p>Works with GitHub, GitLab, Jenkins</p></div>
+      <div class="col-md-4"><h6>🔒 Compliance Ready</h6><p>PCI DSS, SOC 2, HIPAA aligned</p></div>
+      <div class="col-md-4"><h6>📊 Unified Dashboard</h6><p>Track security status in real-time</p></div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section id="pricing" class="bg-light">
+<section id="pricing">
   <div class="container">
     <h2 class="text-center mb-4">Pricing Plans</h2>
     <div class="row text-center">
@@ -105,17 +135,17 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq">
+<section id="faq" class="bg-light">
   <div class="container">
     <h2 class="text-center mb-4">FAQs</h2>
     <div class="accordion" id="faqAccordion">
       <div class="accordion-item">
         <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">Do I need security expertise?</button></h2>
-        <div id="faq1" class="accordion-collapse collapse show"><div class="accordion-body">No — ArmorSDLC is designed for developers and DevOps teams.</div></div>
+        <div id="faq1" class="accordion-collapse collapse show"><div class="accordion-body">No. ArmorSDLC is built for dev teams, with clear fix recommendations.</div></div>
       </div>
       <div class="accordion-item">
-        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Does it integrate with CI/CD?</button></h2>
-        <div id="faq2" class="accordion-collapse collapse"><div class="accordion-body">Yes! We support GitHub, GitLab, Jenkins, and more.</div></div>
+        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">Does it work with GitHub?</button></h2>
+        <div id="faq2" class="accordion-collapse collapse"><div class="accordion-body">Yes. GitHub, GitLab, and Jenkins integrations are supported.</div></div>
       </div>
     </div>
   </div>
@@ -125,7 +155,7 @@
 <section id="contact" class="text-center">
   <div class="container">
     <h2>Contact Us</h2>
-    <p>Have questions or want a demo? Reach out at <strong>contact@armorsdlc.com</strong></p>
+    <p>Questions? Need a demo? Email us at <strong>contact@armorsdlc.com</strong></p>
   </div>
 </section>
 
@@ -144,7 +174,6 @@
     html.setAttribute("data-bs-theme", newTheme);
     localStorage.setItem("theme", newTheme);
   }
-
   (function () {
     const saved = localStorage.getItem("theme") || "light";
     document.documentElement.setAttribute("data-bs-theme", saved);
