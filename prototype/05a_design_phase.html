@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Design Phase - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="mb-4">📐 Design Phase – Threat Modeling</h2>
+
+    <!-- Upload Section -->
+    <div class="mb-4">
+      <label class="form-label">Upload Architecture File (JSON / XML / OTM)</label>
+      <input type="file" class="form-control" />
+      <small class="text-muted">Example: threatmodel.json, app_diagram.otm</small>
+    </div>
+
+    <!-- Embedded Threat Diagram -->
+    <div class="mb-5">
+      <h5>🖼 Threat Model Diagram (Uploaded)</h5>
+      <img src="/image.png" alt="Threat Diagram" class="img-fluid border rounded shadow" />
+    </div>
+
+    <!-- Threat Summary Table -->
+    <h5>📊 Threat Summary</h5>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr><th>Status</th><th>Count</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Not Started</td><td>12</td></tr>
+        <tr><td>Needs Investigation</td><td>0</td></tr>
+        <tr><td>Mitigation Implemented</td><td>0</td></tr>
+      </tbody>
+    </table>
+
+    <!-- STRIDE Threats -->
+    <h5 class="mt-4">🧠 STRIDE Threats Identified</h5>
+    <ul class="list-group mb-4">
+      <li class="list-group-item"><strong>Tampering:</strong> Unsecured API endpoints</li>
+      <li class="list-group-item"><strong>Repudiation:</strong> No audit logging</li>
+      <li class="list-group-item"><strong>Information Disclosure:</strong> Hardcoded secrets</li>
+      <li class="list-group-item"><strong>Denial of Service:</strong> No rate limiting</li>
+      <li class="list-group-item"><strong>Elevation of Privilege:</strong> Missing role enforcement</li>
+    </ul>
+
+    <!-- Mitigations -->
+    <h5>✅ Suggested Mitigations</h5>
+    <ul class="list-group">
+      <li class="list-group-item">Use OAuth 2.0 for API security</li>
+      <li class="list-group-item">Implement centralized audit logs</li>
+      <li class="list-group-item">Store secrets in vault (e.g., HashiCorp)</li>
+      <li class="list-group-item">Enable API Gateway rate limiting</li>
+      <li class="list-group-item">Enforce RBAC at endpoint level</li>
+    </ul>
+
+    <!-- Button -->
+    <div class="text-end mt-4">
+      <a href="04_phase_selector.html" class="btn btn-success">✅ Mark as Reviewed</a>
+    </div>
+  </div>
+</body>
+</html>
