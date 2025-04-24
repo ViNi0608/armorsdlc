@@ -44,14 +44,41 @@
   <section class="section" id="toc">
     <h2>Table of Contents</h2>
     <ol>
+      <li><a href="#vulnerability-table">Vulnerability Table</a></li>
       <li><a href="#design">Design Phase</a></li>
       <li><a href="#development">Development Phase</a></li>
       <li><a href="#testing">Testing Phase</a></li>
       <li><a href="#deployment">Deployment Phase</a></li>
-      <li><a href="#vulnerability-table">Vulnerability Table</a></li>
+      
       <li><a href="#references">References</a></li>
     </ol>
   </section>
+  <!-- VULNERABILITY SUMMARY TABLE -->
+<section class="section" id="vulnerability-table">
+  <h2>Vulnerability Summary Table</h2>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Phase</th>
+        <th>Issue</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Design</td><td>Unauthenticated API</td><td>High</td><td><span class="badge badge-fixed">Reviewed</span></td></tr>
+      <tr><td>Development</td><td>Hardcoded Password</td><td>High</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
+      <tr><td>Development</td><td>Reflected XSS</td><td>Medium</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
+      <tr><td>Testing</td><td>XSS in Search</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Testing</td><td>Open Redirect</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Testing</td><td>Coupon Logic Flaw</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>Public S3</td><td>Critical</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>IAM Wildcard</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>SSH Open Access</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+    </tbody>
+  </table>
+</section>
+
 <!-- DESIGN PHASE -->
 <section class="section" id="design">
   <h2>Design Phase</h2>
@@ -206,31 +233,7 @@
   </div>
 </section>
 
-<!-- VULNERABILITY TABLE -->
-<section class="section" id="vulnerability-table">
-  <h2>Vulnerability Summary Table</h2>
-  <table class="table table-bordered">
-    <thead class="table-light">
-      <tr>
-        <th>Phase</th>
-        <th>Issue</th>
-        <th>Severity</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Design</td><td>Unauthenticated API</td><td>High</td><td><span class="badge badge-fixed">Reviewed</span></td></tr>
-      <tr><td>Development</td><td>Hardcoded Password</td><td>High</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
-      <tr><td>Development</td><td>Reflected XSS</td><td>Medium</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
-      <tr><td>Testing</td><td>XSS in Search</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Testing</td><td>Open Redirect</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Testing</td><td>Coupon Logic Flaw</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>Public S3</td><td>Critical</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>IAM Wildcard</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>SSH Open Access</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
-    </tbody>
-  </table>
-</section>
+
 <!-- REFERENCES -->
 <section class="section" id="references">
   <h2>References</h2>
