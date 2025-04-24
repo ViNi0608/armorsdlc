@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Application Security Summary - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
+    .badge-status { font-size: 0.75rem; padding: 0.35rem 0.6rem; border-radius: 0.4rem; }
+    .badge-fixed { background-color: #d1e7dd; color: #0f5132; }
+    .badge-open { background-color: #fff3cd; color: #664d03; }
+    .badge-critical { background-color: #f8d7da; color: #842029; }
+    table td, table th { vertical-align: middle; font-size: 0.92rem; }
+    .table-hover tbody tr:hover { background-color: #f1f3f5; }
+    .phase-title { font-weight: 600; color: #212529; }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4">🔐 Application Security Report</h2>
+    <p class="text-muted">Below is a summary of all detected vulnerabilities across the SDLC with their status, severity, and remediation suggestions.</p>
+
+    <div class="table-responsive shadow-sm">
+      <table class="table table-bordered table-hover bg-white">
+        <thead class="table-light">
+          <tr>
+            <th>Phase</th>
+            <th>File/Endpoint</th>
+            <th>Vulnerability</th>
+            <th>Severity</th>
+            <th>Suggested Fix</th>
+            <th>References</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Design -->
+          <tr>
+            <td class="phase-title">Design</td>
+            <td>architecture.json</td>
+            <td>Unauthenticated API Access</td>
+            <td><span class="badge bg-danger">High</span></td>
+            <td>Implement OAuth 2.0 and token validation</td>
+            <td><a href="https://owasp.org/www-project-threat-modeling/" target="_blank">OWASP STRIDE</a></td>
+            <td><span class="badge badge-fixed">Reviewed</span></td>
+          </tr>
+
+          <!-- Development -->
+          <tr>
+            <td class="phase-title">Development</td>
+            <td>auth/login.js</td>
+            <td>Hardcoded Password</td>
+            <td><span class="badge bg-danger">High</span></td>
+            <td>Use environment variable: <code>process.env.ADMIN_PASS</code></td>
+            <td><a href="https://owasp.org/www-project-proactive-controls/#C6" target="_blank">OWASP C6</a></td>
+            <td><span class="badge badge-fixed">Fixed</span></td>
+          </tr>
+          <tr>
+            <td class="phase-title">Development</td>
+            <td>views/profile.ejs</td>
+            <td>Reflected XSS</td>
+            <td><span class="badge bg-warning text-dark">Medium</span></td>
+            <td>Sanitize input using DOMPurify</td>
+            <td><a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank">PortSwigger XSS</a></td>
+            <td><span class="badge badge-fixed">Fixed</span></td>
+          </tr>
+
+          <!-- Testing -->
+          <tr>
+            <td class="phase-title">Testing</td>
+            <td>/search?q=...script...</td>
+            <td>Cross-Site Scripting (XSS)</td>
+            <td><span class="badge bg-danger">High</span></td>
+            <td>Server-side input validation</td>
+            <td><a href="https://owasp.org/www-community/attacks/xss/" target="_blank">OWASP XSS</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="phase-title">Testing</td>
+            <td>/redirect?url=...</td>
+            <td>Open Redirect</td>
+            <td><span class="badge bg-warning text-dark">Medium</span></td>
+            <td>Whitelist allowed domains</td>
+            <td><a href="https://portswigger.net/web-security/open-redirect" target="_blank">PortSwigger</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="phase-title">Testing</td>
+            <td>/apply-coupon</td>
+            <td>Logic Flaw – Reusable Promo Code</td>
+            <td><span class="badge bg-warning text-dark">Medium</span></td>
+            <td>Invalidate after use, bind to user session</td>
+            <td><a href="https://portswigger.net/web-security/business-logic" target="_blank">PortSwigger</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+
+          <!-- Deployment -->
+          <tr>
+            <td class="phase-title">Deployment</td>
+            <td>S3://user-backups</td>
+            <td>Public S3 Bucket</td>
+            <td><span class="badge bg-danger">Critical</span></td>
+            <td>Block public access via bucket policy</td>
+            <td><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html" target="_blank">AWS Docs</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="phase-title">Deployment</td>
+            <td>AdminPolicy (IAM)</td>
+            <td>Overly Permissive Policy</td>
+            <td><span class="badge bg-danger">High</span></td>
+            <td>Apply least privilege</td>
+            <td><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">AWS IAM</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+          <tr>
+            <td class="phase-title">Deployment</td>
+            <td>Firewall Port 22</td>
+            <td>SSH Open to World</td>
+            <td><span class="badge bg-danger">High</span></td>
+            <td>Limit to trusted IPs only</td>
+            <td><a href="https://www.ssh.com/academy/ssh/security-best-practices" target="_blank">SSH.com</a></td>
+            <td><span class="badge badge-open">Open</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-5 text-end">
+      <a href="06_my_projects.html" class="btn btn-outline-secondary">← Back to Projects</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
