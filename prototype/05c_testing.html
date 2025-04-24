@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Testing Phase - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
+    .section { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
+    .vuln-box { border-left: 4px solid #6610f2; padding: 1rem; margin-bottom: 2rem; background: #f6f3ff; }
+    .btn-orange { background-color: #ff6a00; color: #fff; }
+    .btn-orange:hover { background-color: #e65c00; }
+    .ref-list { font-size: 0.9rem; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4">Testing Phase: Runtime Vulnerability Scanning</h2>
+
+    <div class="section mb-4">
+      <h5>1. Configure Testing Parameters</h5>
+      <form>
+        <div class="mb-3">
+          <label class="form-label">Application URL:</label>
+          <input type="url" class="form-control" placeholder="https://app.example.com" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Authentication Credentials (optional):</label>
+          <input type="text" class="form-control mb-2" placeholder="Username">
+          <input type="password" class="form-control" placeholder="Password">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">App Description (for Logic Testing):</label>
+          <textarea class="form-control" rows="3" placeholder="Briefly describe the app's purpose, flow, key functions"></textarea>
+        </div>
+        <button type="submit" class="btn btn-orange">Start DAST Scan</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h5>2. DAST Findings</h5>
+
+      <!-- XSS -->
+      <div class="vuln-box">
+        <strong>Vulnerability:</strong> Cross-Site Scripting (XSS)<br/>
+        <strong>Severity:</strong> High<br/>
+        <strong>Vulnerable URL:</strong> <code>/search?q=&lt;script&gt;alert(1)&lt;/script&gt;</code><br/>
+        <strong>Remediation:</strong> Sanitize inputs using DOMPurify or apply strict server-side input validation.
+        <div class="ref-list">
+          <strong>References:</strong>
+          <ul>
+            <li><a href="https://owasp.org/www-community/attacks/xss/" target="_blank">OWASP: XSS Overview</a></li>
+            <li><a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank">PortSwigger: XSS Academy</a></li>
+            <li><a href="https://github.com/cure53/DOMPurify" target="_blank">DOMPurify GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Open Redirect -->
+      <div class="vuln-box">
+        <strong>Vulnerability:</strong> Open Redirect<br/>
+        <strong>Severity:</strong> Medium<br/>
+        <strong>Vulnerable URL:</strong> <code>/redirect?url=http://malicious.com</code><br/>
+        <strong>Remediation:</strong> Validate redirect targets against a whitelist and enforce domain-level restrictions.
+        <div class="ref-list">
+          <strong>References:</strong>
+          <ul>
+            <li><a href="https://owasp.org/www-community/attacks/Unvalidated_redirects_and_forwards" target="_blank">OWASP: Open Redirects</a></li>
+            <li><a href="https://portswigger.net/web-security/open-redirect" target="_blank">PortSwigger: Open Redirect</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Logic Flaw -->
+      <div class="vuln-box">
+        <strong>Vulnerability:</strong> Reusable Promo Codes<br/>
+        <strong>Severity:</strong> Logic-Level<br/>
+        <strong>Vulnerable URL:</strong> <code>/apply-coupon?code=WELCOME100</code><br/>
+        <strong>Remediation:</strong> Invalidate coupon post-use and enforce ownership validation using session/user ID.
+        <div class="ref-list">
+          <strong>References:</strong>
+          <ul>
+            <li><a href="https://portswigger.net/web-security/business-logic" target="_blank">PortSwigger: Business Logic Vulnerabilities</a></li>
+            <li><a href="https://owasp.org/www-project-proactive-controls/#C1-Enforce-Access-Controls" target="_blank">OWASP: Enforcing Access Controls</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-end mt-4">
+        <a href="04_phase_selector.html" class="btn btn-outline-secondary">← Back</a>
+        <a href="05d_deployment.html" class="btn btn-orange">Proceed to Deployment →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
