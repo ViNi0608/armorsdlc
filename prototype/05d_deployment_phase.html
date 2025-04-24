@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment Phase - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .result-box {
+      background-color: #fff;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 10px rgba(0,0,0,0.05);
+      border-left: 5px solid #0d6efd;
+    }
+    .code-block {
+      background: #f8f9fa;
+      font-family: monospace;
+      padding: 1rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="mb-4">☁️ Deployment Phase – Cloud & Config Security Review</h2>
+
+    <!-- Input Section -->
+    <div class="mb-4">
+      <label class="form-label">Upload Cloud Config File or Connect Cloud Provider</label>
+      <input type="file" class="form-control mb-2" />
+      <small class="text-muted">Supported formats: YAML, JSON, Terraform. Or simulate a connection to AWS, Azure, or GCP.</small>
+      <button class="btn btn-primary mt-3">🔍 Start Review</button>
+    </div>
+
+    <!-- Simulated Scan Results -->
+    <p class="text-muted mt-4 mb-4">Review Complete — 3 misconfigurations detected:</p>
+
+    <!-- S3 Bucket -->
+    <div class="result-box">
+      <h5>📂 Public S3 Bucket</h5>
+      <p><strong>Resource:</strong> <code>arn:aws:s3:::app-backups</code></p>
+      <p><strong>Risk:</strong> High</p>
+      <h6>Issue:</h6>
+      <p>The bucket is publicly accessible and allows list/read access to any user.</p>
+      <h6>Recommended Mitigation:</h6>
+      <ul>
+        <li>Set bucket permissions to <code>private</code></li>
+        <li>Use IAM policies to restrict access to authorized roles only</li>
+      </ul>
+    </div>
+
+    <!-- IAM Policy -->
+    <div class="result-box">
+      <h5>🔐 Overly Permissive IAM Role</h5>
+      <p><strong>Resource:</strong> <code>iam-role/DevOpsAdmin</code></p>
+      <p><strong>Risk:</strong> Medium</p>
+      <h6>Issue:</h6>
+      <p>IAM role includes wildcard permissions like <code>"s3:*"</code> and <code>"ec2:*"</code></p>
+      <h6>Recommended Mitigation:</h6>
+      <ul>
+        <li>Apply least privilege principles</li>
+        <li>Use specific actions like <code>"s3:GetObject"</code> or <code>"ec2:StartInstances"</code></li>
+      </ul>
+    </div>
+
+    <!-- Public Port -->
+    <div class="result-box">
+      <h5>🌐 Publicly Open Port</h5>
+      <p><strong>Resource:</strong> <code>EC2 Security Group</code> – <code>0.0.0.0/0 → port 22</code></p>
+      <p><strong>Risk:</strong> Critical</p>
+      <h6>Issue:</h6>
+      <p>SSH port is open to the entire internet, exposing your servers to brute-force attacks.</p>
+      <h6>Recommended Mitigation:</h6>
+      <ul>
+        <li>Restrict SSH access to specific IPs (e.g., office network)</li>
+        <li>Use bastion host or VPN to manage admin access</li>
+      </ul>
+    </div>
+
+    <!-- Action -->
+    <div class="text-end">
+      <a href="04_phase_selector.html" class="btn btn-success">✅ Acknowledge & Return to Workflow</a>
+    </div>
+  </div>
+</body>
+</html>
