@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Design Phase - ArmorSDLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
+    .section { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
+    .threat-box { border-left: 4px solid #ff6a00; padding: 1rem; margin-bottom: 1.5rem; background: #fffdf9; }
+    .threat-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .btn-orange { background-color: #ff6a00; color: #fff; }
+    .btn-orange:hover { background-color: #e65c00; }
+  </style>
 </head>
-<body class="bg-light">
+<body>
   <div class="container py-5">
-    <h2 class="mb-4">📐 Design Phase – Threat Modeling</h2>
+    <h2 class="mb-4">Design Phase: Automated Threat Modeling</h2>
 
-    <!-- Upload Section -->
-    <div class="mb-4">
-      <label class="form-label">Upload Architecture File (JSON / XML / OTM)</label>
-      <input type="file" class="form-control" />
-      <small class="text-muted">Example: threatmodel.json, app_diagram.otm</small>
+    <div class="section mb-4">
+      <h5>1. Upload Architecture File</h5>
+      <p class="text-muted mb-3">Supported formats: JSON, XML, PNG (e.g., draw.io export)</p>
+      <form>
+        <input type="file" class="form-control mb-3" required>
+        <button type="submit" class="btn btn-orange">Run Threat Analysis</button>
+      </form>
     </div>
 
-    <!-- Embedded Threat Diagram -->
-    <div class="mb-5">
-      <h5>🖼 Threat Model Diagram (Uploaded)</h5>
-      <img src="/armorsdlc/prototype/image.png" alt="Threat Diagram" class="img-fluid border rounded shadow" />
-    </div>
+    <div class="section">
+      <h5>2. STRIDE-Based Threat Report</h5>
+      <p class="text-muted">Below are the detected risks with their classification and recommendations:</p>
 
-    <!-- Threat Summary Table -->
-    <h5>📊 Threat Summary</h5>
-    <table class="table table-bordered">
-      <thead class="table-light">
-        <tr><th>Status</th><th>Count</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Not Started</td><td>12</td></tr>
-        <tr><td>Needs Investigation</td><td>0</td></tr>
-        <tr><td>Mitigation Implemented</td><td>0</td></tr>
-      </tbody>
-    </table>
+      <div class="threat-box">
+        <div class="threat-title">🟠 Risk: Unauthenticated API Access</div>
+        <ul class="mb-1">
+          <li><strong>STRIDE Category:</strong> Spoofing</li>
+          <li><strong>Impact:</strong> External attackers can impersonate users</li>
+          <li><strong>Mitigation:</strong> Enforce OAuth 2.0, implement access tokens, and audit API logs</li>
+        </ul>
+      </div>
 
-    <!-- STRIDE Threats -->
-    <h5 class="mt-4">🧠 STRIDE Threats Identified</h5>
-    <ul class="list-group mb-4">
-      <li class="list-group-item"><strong>Tampering:</strong> Unsecured API endpoints</li>
-      <li class="list-group-item"><strong>Repudiation:</strong> No audit logging</li>
-      <li class="list-group-item"><strong>Information Disclosure:</strong> Hardcoded secrets</li>
-      <li class="list-group-item"><strong>Denial of Service:</strong> No rate limiting</li>
-      <li class="list-group-item"><strong>Elevation of Privilege:</strong> Missing role enforcement</li>
-    </ul>
+      <div class="threat-box">
+        <div class="threat-title">🟡 Risk: Secrets Stored in Diagrams</div>
+        <ul class="mb-1">
+          <li><strong>STRIDE Category:</strong> Information Disclosure</li>
+          <li><strong>Impact:</strong> Leaked credentials or keys visible to unauthorized viewers</li>
+          <li><strong>Mitigation:</strong> Externalize secrets to a vault (AWS Secrets Manager, HashiCorp Vault)</li>
+        </ul>
+      </div>
 
-    <!-- Mitigations -->
-    <h5>✅ Suggested Mitigations</h5>
-    <ul class="list-group">
-      <li class="list-group-item">Use OAuth 2.0 for API security</li>
-      <li class="list-group-item">Implement centralized audit logs</li>
-      <li class="list-group-item">Store secrets in vault (e.g., HashiCorp)</li>
-      <li class="list-group-item">Enable API Gateway rate limiting</li>
-      <li class="list-group-item">Enforce RBAC at endpoint level</li>
-    </ul>
+      <div class="threat-box">
+        <div class="threat-title">🟣 Risk: Missing Data Flow Encryption</div>
+        <ul class="mb-1">
+          <li><strong>STRIDE Category:</strong> Tampering</li>
+          <li><strong>Impact:</strong> Data may be intercepted or modified during transmission</li>
+          <li><strong>Mitigation:</strong> Enforce TLS 1.2+, disable insecure cipher suites</li>
+        </ul>
+      </div>
 
-    <!-- Button -->
-    <div class="text-end mt-4">
-      <a href="04_phase_selector.html" class="btn btn-success">✅ Mark as Reviewed</a>
+      <div class="text-end mt-4">
+        <a href="04_phase_selector.html" class="btn btn-outline-secondary">← Back</a>
+        <a href="05b_development.html" class="btn btn-orange">Mark as Reviewed →</a>
+      </div>
     </div>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
