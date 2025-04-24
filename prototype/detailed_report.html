@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Fintech App – Full Security Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background-color: #fff; color: #212529; }
+    h1, h2, h3 { color: #ff6a00; }
+    .section { padding-top: 40px; padding-bottom: 30px; border-bottom: 1px solid #dee2e6; }
+    .issue-block { background: #f9f9f9; padding: 20px; border-left: 5px solid #ff6a00; border-radius: 5px; margin-bottom: 25px; }
+    .code-block { background: #f0f0f0; padding: 10px; border-radius: 4px; font-family: monospace; }
+    .ref-list ul { padding-left: 1rem; }
+    .badge-open { background-color: #fff3cd; color: #664d03; }
+    .badge-fixed { background-color: #d1e7dd; color: #0f5132; }
+    .badge-critical { background-color: #f8d7da; color: #842029; }
+    .conf-note { font-size: 0.85rem; color: #6c757d; margin-top: 40px; }
+    .page-break { page-break-after: always; }
+    @media print { .no-print { display: none; } }
+  </style>
+</head>
+<body class="container py-4">
+
+  <!-- HEADER -->
+  <header class="text-center mb-4">
+    <h1>ArmorSDLC – Security Report</h1>
+    <h5 class="text-muted">Application: My Fintech App</h5>
+    <p>Generated: <script>document.write(new Date().toLocaleDateString());</script></p>
+  </header>
+
+  <!-- EXECUTIVE SUMMARY -->
+  <section class="section" id="executive-summary">
+    <h2>Executive Summary</h2>
+    <ul>
+      <li><strong>Total Issues:</strong> 9</li>
+      <li><strongSeverity Distribution:</strong> Critical: 1, High: 4, Medium: 4</li>
+      <li><strong>Overall Security Posture:</strong> ⚠️ Moderate – Immediate remediation required</li>
+      <li><strong>Compliance Risk:</strong> PCI DSS, SOC 2 impacted due to exploitable flaws</li>
+    </ul>
+  </section>
+
+  <!-- TABLE OF CONTENTS -->
+  <section class="section" id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#design">Design Phase</a></li>
+      <li><a href="#development">Development Phase</a></li>
+      <li><a href="#testing">Testing Phase</a></li>
+      <li><a href="#deployment">Deployment Phase</a></li>
+      <li><a href="#vulnerability-table">Vulnerability Table</a></li>
+      <li><a href="#references">References</a></li>
+    </ol>
+  </section>
+<!-- DESIGN PHASE -->
+<section class="section" id="design">
+  <h2>Design Phase</h2>
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Unauthenticated API Access</p>
+    <p><strong>File:</strong> <code>architecture.json</code></p>
+    <p><strong>Threat Model:</strong> STRIDE → Tampering, Information Disclosure</p>
+    <p><strong>Mitigation:</strong> Enforce OAuth 2.0 authentication and token verification for all API endpoints.</p>
+    <p><strong>Status:</strong> Reviewed</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DEVELOPMENT PHASE -->
+<section class="section" id="development">
+  <h2>Development Phase</h2>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Hardcoded Password</p>
+    <p><strong>File:</strong> <code>auth/login.js</code></p>
+    <p><strong>Severity:</strong> High</p>
+    <p><strong>Auto-fix Applied:</strong></p>
+    <div class="code-block">
+      - const password = "admin123";<br>
+      + const password = process.env.ADMIN_PASS;
+    </div>
+    <p><strong>Explanation:</strong> Hardcoded credentials are easily exposed in source code. Use secure environment variables to protect secrets.</p>
+    <p><strong>Status:</strong> Fixed</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://owasp.org/www-project-proactive-controls/#C6">OWASP C6 – Secure Credential Handling</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Reflected XSS</p>
+    <p><strong>File:</strong> <code>views/profile.ejs</code></p>
+    <p><strong>Severity:</strong> Medium</p>
+    <p><strong>Auto-fix Applied:</strong></p>
+    <div class="code-block">
+      - &lt;%= username %&gt;<br>
+      + &lt;%= DOMPurify.sanitize(username) %&gt;
+    </div>
+    <p><strong>Explanation:</strong> Output is unescaped. Using sanitization libraries prevents reflected injection attacks.</p>
+    <p><strong>Status:</strong> Fixed</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://portswigger.net/web-security/cross-site-scripting">PortSwigger XSS Guide</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<!-- TESTING PHASE -->
+<section class="section" id="testing">
+  <h2>Testing Phase</h2>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Stored XSS in Search Bar</p>
+    <p><strong>Endpoint:</strong> <code>/search?q=&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
+    <p><strong>Severity:</strong> High</p>
+    <p><strong>Fix:</strong> Sanitize user input and use output encoding. Implement CSP (Content Security Policy).</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://owasp.org/www-community/attacks/xss/">OWASP XSS</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Open Redirect</p>
+    <p><strong>Endpoint:</strong> <code>/redirect?url=http://evil.com</code></p>
+    <p><strong>Severity:</strong> Medium</p>
+    <p><strong>Fix:</strong> Whitelist redirect domains or validate destination with redirect tokens.</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://portswigger.net/web-security/open-redirect">PortSwigger – Open Redirect</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Logic Flaw – Reusable Promo Code</p>
+    <p><strong>Endpoint:</strong> <code>/apply-coupon?code=WELCOME100</code></p>
+    <p><strong>Severity:</strong> Medium</p>
+    <p><strong>Fix:</strong> Bind promo code to unique user/session and expire after single use.</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://portswigger.net/web-security/business-logic">Business Logic Vulnerabilities</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DEPLOYMENT PHASE -->
+<section class="section" id="deployment">
+  <h2>Deployment Phase</h2>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Public S3 Bucket</p>
+    <p><strong>Resource:</strong> <code>s3://user-backups</code></p>
+    <p><strong>Severity:</strong> Critical</p>
+    <p><strong>Fix:</strong> Block all public access and enforce IAM policies for controlled access.</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS: S3 Public Access</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> Over-permissive IAM Role</p>
+    <p><strong>Resource:</strong> <code>IAM: AdminWildcard</code></p>
+    <p><strong>Severity:</strong> High</p>
+    <p><strong>Fix:</strong> Use least privilege. Replace wildcards with exact permissions.</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM Best Practices</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="issue-block">
+    <p><strong>Issue:</strong> SSH Open to World</p>
+    <p><strong>Resource:</strong> <code>Firewall: 0.0.0.0/0 → Port 22</code></p>
+    <p><strong>Severity:</strong> High</p>
+    <p><strong>Fix:</strong> Restrict access by IP, use VPN or bastion hosts.</p>
+    <p><strong>Status:</strong> Open</p>
+    <div class="ref-list">
+      <strong>References:</strong>
+      <ul>
+        <li><a href="https://www.ssh.com/academy/ssh/security-best-practices">SSH Security Best Practices</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VULNERABILITY TABLE -->
+<section class="section" id="vulnerability-table">
+  <h2>Vulnerability Summary Table</h2>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Phase</th>
+        <th>Issue</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Design</td><td>Unauthenticated API</td><td>High</td><td><span class="badge badge-fixed">Reviewed</span></td></tr>
+      <tr><td>Development</td><td>Hardcoded Password</td><td>High</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
+      <tr><td>Development</td><td>Reflected XSS</td><td>Medium</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
+      <tr><td>Testing</td><td>XSS in Search</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Testing</td><td>Open Redirect</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Testing</td><td>Coupon Logic Flaw</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>Public S3</td><td>Critical</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>IAM Wildcard</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr><td>Deployment</td><td>SSH Open Access</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+    </tbody>
+  </table>
+</section>
+<!-- REFERENCES -->
+<section class="section" id="references">
+  <h2>References</h2>
+  <ul>
+    <li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling</a></li>
+    <li><a href="https://owasp.org/www-project-proactive-controls/#C6">OWASP C6 – Secure Credential Handling</a></li>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting">PortSwigger – Reflected & Stored XSS</a></li>
+    <li><a href="https://portswigger.net/web-security/open-redirect">PortSwigger – Open Redirect</a></li>
+    <li><a href="https://portswigger.net/web-security/business-logic">PortSwigger – Business Logic Flaws</a></li>
+    <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS: Block Public S3 Access</a></li>
+    <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM Best Practices</a></li>
+    <li><a href="https://www.ssh.com/academy/ssh/security-best-practices">SSH.com – Best Practices</a></li>
+  </ul>
+</section>
+
+<!-- PRINT TO PDF BUTTON -->
+<div class="text-center my-5 no-print">
+  <button onclick="window.print()" class="btn btn-outline-primary">🖨️ Print / Save as PDF</button>
+</div>
+
+<!-- CONFIDENTIALITY FOOTER -->
+<footer class="text-center text-muted conf-note">
+  This report is confidential and intended for internal use within My Fintech App’s security team. Do not share externally without prior approval.
+</footer>
+
+</body>
+</html>
