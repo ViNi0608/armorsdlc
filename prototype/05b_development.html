@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Development Phase - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
+    .section { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
+    .code-block { background: #f1f3f5; font-family: monospace; font-size: 0.9rem; padding: 1rem; border-radius: 6px; white-space: pre-wrap; }
+    .vuln-box { border-left: 4px solid #0d6efd; padding: 1rem; margin-bottom: 1.5rem; background: #f8faff; }
+    .btn-orange { background-color: #ff6a00; color: #fff; }
+    .btn-orange:hover { background-color: #e65c00; }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4">Development Phase: Code Vulnerability Review</h2>
+
+    <div class="section mb-4">
+      <h5>1. Connect Source</h5>
+      <form>
+        <label class="form-label">Upload code or connect repository:</label>
+        <input type="file" class="form-control mb-3" required>
+        <button type="submit" class="btn btn-orange">Scan Code</button>
+      </form>
+    </div>
+
+    <div class="section">
+      <h5>2. Detected Vulnerabilities</h5>
+      <div class="vuln-box">
+        <strong>File:</strong> <code>auth/login.js</code><br/>
+        <strong>Type:</strong> Hardcoded Password<br/>
+        <strong>Risk:</strong> High<br/>
+        <strong>Explanation:</strong> Exposes credentials in source control<br/>
+        <strong>Suggested Fix:</strong> Use secrets manager<br/>
+        <strong>Auto-fix:</strong> <code>process.env.ADMIN_PASS</code><br/>
+        <strong>Code Diff:</strong>
+        <div class="code-block">
+          - const pass = "admin123";<br/>
+          + const pass = process.env.ADMIN_PASS;
+        </div>
+        <p><strong>Fix Explanation:</strong> Hardcoded credentials are accessible in repos. Environment variables abstract sensitive data into the runtime context.</p>
+      </div>
+
+      <div class="vuln-box">
+        <strong>File:</strong> <code>views/profile.ejs</code><br/>
+        <strong>Type:</strong> Reflected XSS<br/>
+        <strong>Risk:</strong> Medium<br/>
+        <strong>Explanation:</strong> Unescaped user input displayed<br/>
+        <strong>Suggested Fix:</strong> Sanitize with DOMPurify<br/>
+        <strong>Code Diff:</strong>
+        <div class="code-block">
+          - &lt;%= username %&gt;<br/>
+          + &lt;%= DOMPurify.sanitize(username) %&gt;
+        </div>
+        <p><strong>Fix Explanation:</strong> Escaping input prevents attacker-supplied scripts from executing in browser.</p>
+      </div>
+
+      <div class="text-end mt-4">
+        <a href="04_phase_selector.html" class="btn btn-outline-secondary">← Back</a>
+        <a href="05c_testing.html" class="btn btn-orange">Proceed to Testing →</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
