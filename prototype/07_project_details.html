@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Application Security Dashboard - ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; }
+    .card-summary {
+      background: #fff;
+      padding: 1.25rem;
+      border-left: 4px solid #0d6efd;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+    }
+    .tag {
+      background: #dee2e6;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 0.75rem;
+      margin: 0 5px 5px 0;
+      display: inline-block;
+    }
+    .status-badge {
+      font-size: 0.75rem;
+    }
+    .chart-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(#dc3545 0% 22%, #ffc107 22% 55%, #0dcaf0 55% 89%, #adb5bd 89% 100%);
+      margin: auto;
+    }
+    .vuln-card {
+      background: #fff;
+      border-left: 5px solid #ff6a00;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px rgba(0,0,0,0.03);
+    }
+    .toggle-btn {
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h2 class="mb-4">🛡️ Application Security Dashboard: <strong>My Fintech App</strong></h2>
+
+    <!-- Summary Section -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-3"><div class="card-summary text-center"><small class="text-muted">Risk Score</small><h4 class="text-warning">78 / 100</h4></div></div>
+      <div class="col-md-3"><div class="card-summary text-center"><small class="text-muted">Total Issues</small><h4>9</h4></div></div>
+      <div class="col-md-3"><div class="card-summary text-center"><small class="text-muted">Last Scan</small><h5>April 23, 2025</h5></div></div>
+      <div class="col-md-3 text-center"><div class="card-summary"><small class="text-muted">Export</small><br/><a href="#" class="btn btn-sm btn-outline-primary mt-2">PDF</a><a href="#" class="btn btn-sm btn-outline-secondary mt-2 ms-2">CSV</a></div></div>
+    </div>
+
+    <!-- Severity Chart -->
+    <div class="text-center my-4">
+      <h6 class="text-muted">Severity Breakdown</h6>
+      <div class="chart-placeholder"></div>
+      <div class="mt-2">
+        <span class="badge bg-danger">Critical: 2</span>
+        <span class="badge bg-warning text-dark">High: 3</span>
+        <span class="badge bg-info text-dark">Medium: 3</span>
+        <span class="badge bg-secondary">Low: 1</span>
+      </div>
+    </div>
+
+    <!-- Compliance Tags -->
+    <h6 class="mt-4 mb-2 text-muted">Mapped Compliance Standards</h6>
+    <div class="mb-4">
+      <span class="tag">PCI DSS</span>
+      <span class="tag">SOC 2</span>
+      <span class="tag">HIPAA</span>
+      <span class="tag">OWASP Top 10</span>
+    </div>
+
+    <!-- Phase Tabs -->
+    <ul class="nav nav-tabs" id="phaseTabs" role="tablist">
+      <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#design">Design</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#development">Development</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#testing">Testing</a></li>
+      <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#deployment">Deployment</a></li>
+    </ul>
+
+    <div class="tab-content mt-4">
+      <!-- Design Tab -->
+      <div class="tab-pane fade show active" id="design">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Design Phase Findings</h5>
+          <button class="btn btn-sm btn-outline-dark toggle-btn" onclick="toggleView('design')">🔁 Switch View</button>
+        </div>
+
+        <!-- Table View -->
+        <div id="design-table">
+          <table class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>Vulnerability</th>
+                <th>Severity</th>
+                <th>File / Asset</th>
+                <th>Compliance</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Unauthenticated API Access</td>
+                <td><span class="badge bg-warning text-dark">High</span></td>
+                <td>architecture.json</td>
+                <td><span class="tag">OWASP</span></td>
+                <td><span class="badge bg-success">Reviewed</span></td>
+              </tr>
+              <tr>
+                <td>Secrets in Diagrams</td>
+                <td><span class="badge bg-info text-dark">Medium</span></td>
+                <td>flow.drawio</td>
+                <td><span class="tag">SOC 2</span></td>
+                <td><span class="badge bg-success">Reviewed</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Card View -->
+        <div id="design-cards" class="d-none">
+          <div class="vuln-card">
+            <h6>Unauthenticated API Access</h6>
+            <p><strong>File:</strong> architecture.json</p>
+            <p><span class="badge bg-warning text-dark">High</span> <span class="tag">OWASP</span> <span class="badge bg-success">Reviewed</span></p>
+          </div>
+          <div class="vuln-card">
+            <h6>Secrets in Diagrams</h6>
+            <p><strong>File:</strong> flow.drawio</p>
+            <p><span class="badge bg-info text-dark">Medium</span> <span class="tag">SOC 2</span> <span class="badge bg-success">Reviewed</span></p>
+          </div>
+        </div>
+      </div>
+      <!-- Development Tab -->
+      <div class="tab-pane fade" id="development">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Development Phase Findings</h5>
+          <button class="btn btn-sm btn-outline-dark toggle-btn" onclick="toggleView('development')">🔁 Switch View</button>
+        </div>
+        <div id="development-table">
+          <table class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>Issue</th><th>Severity</th><th>File</th><th>Compliance</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Hardcoded Password</td><td><span class="badge bg-danger">Critical</span></td><td>auth.js</td><td><span class="tag">OWASP</span></td><td><span class="badge bg-success">Auto-fixed</span></td>
+              </tr>
+              <tr>
+                <td>SQL Injection</td><td><span class="badge bg-warning text-dark">High</span></td><td>db.js</td><td><span class="tag">PCI DSS</span></td><td><span class="badge bg-success">Auto-fixed</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="development-cards" class="d-none">
+          <div class="vuln-card"><h6>Hardcoded Password</h6><p><strong>File:</strong> auth.js</p><p><span class="badge bg-danger">Critical</span> <span class="tag">OWASP</span> <span class="badge bg-success">Auto-fixed</span></p></div>
+          <div class="vuln-card"><h6>SQL Injection</h6><p><strong>File:</strong> db.js</p><p><span class="badge bg-warning text-dark">High</span> <span class="tag">PCI DSS</span> <span class="badge bg-success">Auto-fixed</span></p></div>
+        </div>
+      </div>
+
+      <!-- Testing Tab -->
+      <div class="tab-pane fade" id="testing">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Testing Phase Findings</h5>
+          <button class="btn btn-sm btn-outline-dark toggle-btn" onclick="toggleView('testing')">🔁 Switch View</button>
+        </div>
+        <div id="testing-table">
+          <table class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr>
+                <th>Issue</th><th>Severity</th><th>Endpoint</th><th>Compliance</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>XSS in Search</td><td><span class="badge bg-warning text-dark">High</span></td><td>/search</td><td><span class="tag">OWASP</span></td><td><span class="badge bg-success">Fixed</span></td></tr>
+              <tr><td>Open Redirect</td><td><span class="badge bg-info text-dark">Medium</span></td><td>/redirect</td><td><span class="tag">SOC 2</span></td><td><span class="badge bg-success">Fixed</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="testing-cards" class="d-none">
+          <div class="vuln-card"><h6>XSS in Search</h6><p><strong>Endpoint:</strong> /search</p><p><span class="badge bg-warning text-dark">High</span> <span class="tag">OWASP</span> <span class="badge bg-success">Fixed</span></p></div>
+          <div class="vuln-card"><h6>Open Redirect</h6><p><strong>Endpoint:</strong> /redirect</p><p><span class="badge bg-info text-dark">Medium</span> <span class="tag">SOC 2</span> <span class="badge bg-success">Fixed</span></p></div>
+        </div>
+      </div>
+
+      <!-- Deployment Tab -->
+      <div class="tab-pane fade" id="deployment">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="mb-0">Deployment Phase Findings</h5>
+          <button class="btn btn-sm btn-outline-dark toggle-btn" onclick="toggleView('deployment')">🔁 Switch View</button>
+        </div>
+        <div id="deployment-table">
+          <table class="table table-bordered table-striped">
+            <thead class="table-light">
+              <tr><th>Misconfiguration</th><th>Severity</th><th>Resource</th><th>Compliance</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Public S3 Bucket</td><td><span class="badge bg-danger">Critical</span></td><td>app-backups</td><td><span class="tag">SOC 2</span></td><td><span class="badge bg-success">Secured</span></td></tr>
+              <tr><td>Open Port 22</td><td><span class="badge bg-danger">Critical</span></td><td>0.0.0.0/0</td><td><span class="tag">PCI DSS</span></td><td><span class="badge bg-danger">Unresolved</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="deployment-cards" class="d-none">
+          <div class="vuln-card"><h6>Public S3 Bucket</h6><p><strong>Resource:</strong> app-backups</p><p><span class="badge bg-danger">Critical</span> <span class="tag">SOC 2</span> <span class="badge bg-success">Secured</span></p></div>
+          <div class="vuln-card"><h6>Open Port 22</h6><p><strong>Resource:</strong> 0.0.0.0/0</p><p><span class="badge bg-danger">Critical</span> <span class="tag">PCI DSS</span> <span class="badge bg-danger">Unresolved</span></p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-end mt-5">
+      <a href="06_my_projects.html" class="btn btn-secondary">← Back to Project List</a>
+    </div>
+  </div>
+
+  <!-- Bootstrap + Toggle Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function toggleView(phase) {
+      const table = document.getElementById(`${phase}-table`);
+      const cards = document.getElementById(`${phase}-cards`);
+      if (table.classList.contains("d-none")) {
+        table.classList.remove("d-none");
+        cards.classList.add("d-none");
+      } else {
+        table.classList.add("d-none");
+        cards.classList.remove("d-none");
+      }
+    }
+  </script>
+</body>
+</html>
