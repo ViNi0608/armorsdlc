@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <title>Create Project – ArmorSDLC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -40,37 +41,41 @@
         </div>
       </form>
 
-      <!-- SDLC Phase Overview -->
+     <!-- SDLC Phase Overview with Icons -->
 <div class="row mb-5">
   <div class="col-md-6 col-lg-3 mb-4">
-    <div class="card card-phase shadow-sm h-100">
+    <div class="card card-phase shadow-sm h-100 text-center">
       <div class="card-body">
-        <h5 class="mb-2">Design Phase</h5>
-        <p class="text-muted">Automated threat modeling using STRIDE, based on architecture files (JSON, OTM, diagrams).</p>
+        <i class="bi bi-diagram-3 display-6 text-primary mb-2"></i>
+        <h5>Design Phase</h5>
+        <p class="text-muted">Threat modeling using STRIDE, applied to architecture diagrams or JSON inputs.</p>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3 mb-4">
-    <div class="card card-phase shadow-sm h-100">
+    <div class="card card-phase shadow-sm h-100 text-center">
       <div class="card-body">
-        <h5 class="mb-2">Development Phase</h5>
-        <p class="text-muted">Static code analysis with auto-fix recommendations and secure pull request workflows.</p>
+        <i class="bi bi-code-slash display-6 text-success mb-2"></i>
+        <h5>Development Phase</h5>
+        <p class="text-muted">Code scanning, auto-fix suggestions, and secure review pipelines.</p>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3 mb-4">
-    <div class="card card-phase shadow-sm h-100">
+    <div class="card card-phase shadow-sm h-100 text-center">
       <div class="card-body">
-        <h5 class="mb-2">Testing Phase</h5>
-        <p class="text-muted">Dynamic application scanning (DAST) with logic-aware analysis and detailed reporting.</p>
+        <i class="bi bi-shield-check display-6 text-warning mb-2"></i>
+        <h5>Testing Phase</h5>
+        <p class="text-muted">Run automated DAST scans and flag logic-based vulnerabilities.</p>
       </div>
     </div>
   </div>
   <div class="col-md-6 col-lg-3 mb-4">
-    <div class="card card-phase shadow-sm h-100">
+    <div class="card card-phase shadow-sm h-100 text-center">
       <div class="card-body">
-        <h5 class="mb-2">Deployment Phase</h5>
-        <p class="text-muted">Secure cloud configuration, IAM validation, and infrastructure hardening checks.</p>
+        <i class="bi bi-cloud-upload display-6 text-info mb-2"></i>
+        <h5>Deployment Phase</h5>
+        <p class="text-muted">Review infrastructure, IAM policies, and secure your deployment.</p>
       </div>
     </div>
   </div>
