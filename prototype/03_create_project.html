@@ -1,87 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Create New Project - ArmorSDLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Create Project – ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .phase-card {
-      border: 1px solid #dee2e6;
-      border-radius: 6px;
-      padding: 1.25rem;
-      transition: all 0.2s ease-in-out;
-      background: white;
-      box-shadow: 0 0 5px rgba(0,0,0,0.03);
-    }
-    .phase-card:hover {
-      box-shadow: 0 0 10px rgba(0,0,0,0.08);
-      transform: scale(1.01);
-    }
-    .phase-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-    }
-    .btn-proceed {
-      background-color: #ff6a00;
-      color: white;
-    }
-    .btn-proceed:hover {
-      background-color: #e65c00;
-    }
+    body { font-family: 'Segoe UI', sans-serif; }
+    .sidebar { width: 250px; height: 100vh; }
+    .sidebar a { color: #fff; text-decoration: none; }
+    .sidebar a:hover { text-decoration: underline; }
+    .card-phase h5 { font-size: 1.1rem; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h2 class="mb-4">Create New Project</h2>
-    
-    <!-- Form -->
-    <form class="mb-5">
-      <div class="mb-3">
-        <label for="projectName" class="form-label">Project Name</label>
-        <input type="text" id="projectName" class="form-control" placeholder="Enter project name" required>
-      </div>
-    </form>
-
-    <h5 class="mb-4">How ArmorSDLC Secures Your Workflow</h5>
-
-    <div class="row g-4 mb-5">
-      <div class="col-md-6 col-lg-3">
-        <div class="phase-card">
-          <div class="phase-title mb-2">🧩 Design</div>
-          <p class="text-muted">Upload architecture (JSON/XML). STRIDE model highlights risks like open APIs, suggests OAuth 2.0.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="phase-card">
-          <div class="phase-title mb-2">🔎 Development</div>
-          <p class="text-muted">Scan for XSS, SQLi. Shows diffs and autofix logic. Control stays with your team.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="phase-card">
-          <div class="phase-title mb-2">🧪 Testing</div>
-          <p class="text-muted">Perform Dynamic analysis with logic aware DAST engine.</p>
-        </div>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <div class="phase-card">
-          <div class="phase-title mb-2">☁️ Deployment</div>
-          <p class="text-muted">Cloud security/config reviews (S3, IAM, ports) and server hardening. Ensures secure posture and least privilege setups.</p>
-        </div>
-      </div>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="bg-dark text-white p-4 sidebar">
+      <h4 class="mb-4">ArmorSDLC</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="02_dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active" href="03_create_project.html">Create Project</a></li>
+        <li class="nav-item"><a class="nav-link" href="06_my_projects.html">My Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="08_documentation.html">Documentation</a></li>
+        <li class="nav-item"><a class="nav-link" href="09_support.html">Support</a></li>
+      </ul>
     </div>
 
-    <!-- CTA -->
-    <div class="text-end">
-      <a href="04_phase_selector.html" class="btn btn-proceed btn-lg">Proceed to SDLC Workflow</a>
+    <!-- Main Content -->
+    <div class="p-5 flex-grow-1">
+      <h2 class="mb-3">Create a New Project</h2>
+      <p class="text-muted">Start by naming your application and reviewing the SDLC phases ArmorSDLC will secure.</p>
+
+      <!-- Project Form -->
+      <form class="mb-5">
+        <div class="mb-3" style="max-width: 400px;">
+          <label for="projectName" class="form-label">Project Name</label>
+          <input type="text" class="form-control" id="projectName" placeholder="e.g. My Fintech App" required>
+        </div>
+      </form>
+
+      <!-- SDLC Phase Overview -->
+<div class="row mb-5">
+  <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card card-phase shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="mb-2">Design Phase</h5>
+        <p class="text-muted">Automated threat modeling using STRIDE, based on architecture files (JSON, OTM, diagrams).</p>
+      </div>
     </div>
   </div>
+  <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card card-phase shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="mb-2">Development Phase</h5>
+        <p class="text-muted">Static code analysis with auto-fix recommendations and secure pull request workflows.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card card-phase shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="mb-2">Testing Phase</h5>
+        <p class="text-muted">Dynamic application scanning (DAST) with logic-aware analysis and detailed reporting.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card card-phase shadow-sm h-100">
+      <div class="card-body">
+        <h5 class="mb-2">Deployment Phase</h5>
+        <p class="text-muted">Secure cloud configuration, IAM validation, and infrastructure hardening checks.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- Proceed Button -->
+      <a href="04_phase_selector.html" class="btn btn-primary btn-lg">Proceed to SDLC Workflow</a>
+    </div>
+  </div>
 </body>
 </html>
