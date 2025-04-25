@@ -2,86 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Select SDLC Phase - ArmorSDLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <title>Select Phase – ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .phase-card {
-      padding: 1.5rem;
-      background: #fff;
-      border: 1px solid #dee2e6;
-      border-radius: 6px;
-      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
-      transition: 0.3s ease;
-      text-align: center;
-      cursor: pointer;
-    }
-    .phase-card:hover {
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      transform: scale(1.02);
-    }
-    .phase-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-top: 1rem;
-    }
-    .btn-back {
-      font-size: 0.9rem;
-    }
+    body { font-family: 'Segoe UI', sans-serif; }
+    .sidebar { width: 250px; height: 100vh; }
+    .sidebar a { color: #fff; text-decoration: none; }
+    .sidebar a:hover { text-decoration: underline; }
+    .card-phase h5 { font-size: 1.1rem; }
+    .card-phase:hover { border-color: #ff6a00; cursor: pointer; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h2 class="mb-4">Choose a Phase to Get Started</h2>
-
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <a href="05a_design.html" class="text-decoration-none text-dark">
-          <div class="phase-card">
-            <img src="https://img.icons8.com/ios/60/design--v1.png" alt="Design">
-            <div class="phase-title">Design</div>
-            <p class="text-muted">Upload architecture diagrams and review STRIDE threat analysis.</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <a href="05b_development.html" class="text-decoration-none text-dark">
-          <div class="phase-card">
-            <img src="https://img.icons8.com/ios/60/source-code.png" alt="Development">
-            <div class="phase-title">Development</div>
-            <p class="text-muted">Scan for vulnerabilities in source code and apply auto-fixes.</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <a href="05c_testing.html" class="text-decoration-none text-dark">
-          <div class="phase-card">
-            <img src="https://img.icons8.com/ios/60/bug.png" alt="Testing">
-            <div class="phase-title">Testing</div>
-            <p class="text-muted">Trigger logic-aware scans and see runtime testing results.</p>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-6 col-lg-3">
-        <a href="05d_deployment.html" class="text-decoration-none text-dark">
-          <div class="phase-card">
-            <img src="https://img.icons8.com/ios/60/lock--v1.png" alt="Deployment">
-            <div class="phase-title">Deployment</div>
-            <p class="text-muted">Analyze cloud security posture and configuration risks.</p>
-          </div>
-        </a>
-      </div>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div class="bg-dark text-white p-4 sidebar">
+      <h4 class="mb-4">ArmorSDLC</h4>
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link" href="02_dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="03_create_project.html">Create Project</a></li>
+        <li class="nav-item"><a class="nav-link active" href="04_phase_selector.html">SDLC Phases</a></li>
+        <li class="nav-item"><a class="nav-link" href="06_my_projects.html">My Projects</a></li>
+      </ul>
     </div>
 
-    <div class="mt-5 text-end">
-      <a href="03_create_project.html" class="btn btn-outline-secondary btn-back">← Back</a>
+    <!-- Main Content -->
+    <div class="p-5 flex-grow-1">
+      <h2 class="mb-4">Choose a Phase to Get Started</h2>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <a href="05a_design.html" class="text-decoration-none text-dark">
+            <div class="card card-phase shadow-sm text-center h-100">
+              <div class="card-body">
+                <i class="bi bi-diagram-3 display-6 text-primary mb-2"></i>
+                <h5>Design Phase</h5>
+                <p class="text-muted small">Upload architecture and auto-generate threat models.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <a href="05b_development.html" class="text-decoration-none text-dark">
+            <div class="card card-phase shadow-sm text-center h-100">
+              <div class="card-body">
+                <i class="bi bi-code-slash display-6 text-success mb-2"></i>
+                <h5>Development Phase</h5>
+                <p class="text-muted small">Scan source code and apply intelligent auto-fixes.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <a href="05c_testing.html" class="text-decoration-none text-dark">
+            <div class="card card-phase shadow-sm text-center h-100">
+              <div class="card-body">
+                <i class="bi bi-shield-check display-6 text-warning mb-2"></i>
+                <h5>Testing Phase</h5>
+                <p class="text-muted small">Run logic-aware dynamic scans and optional manual pentests.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <a href="05d_deployment.html" class="text-decoration-none text-dark">
+            <div class="card card-phase shadow-sm text-center h-100">
+              <div class="card-body">
+                <i class="bi bi-cloud-upload display-6 text-info mb-2"></i>
+                <h5>Deployment Phase</h5>
+                <p class="text-muted small">Check cloud config, IAM, and secure infrastructure.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
