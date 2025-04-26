@@ -1,93 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Deployment Phase - ArmorSDLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Deployment Phase – ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
-    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
-    .section { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
-    .issue-box { border-left: 4px solid #198754; padding: 1rem; margin-bottom: 2rem; background: #effff6; }
-    .btn-orange { background-color: #ff6a00; color: #fff; }
-    .btn-orange:hover { background-color: #e65c00; }
-    .ref-list { font-size: 0.9rem; margin-top: 0.5rem; }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #f9fafb; }
+    .sidebar { width: 250px; height: 100vh; background-color: #212529; }
+    .sidebar a { color: #adb5bd; text-decoration: none; }
+    .sidebar a:hover, .sidebar a.active { color: #ffffff; font-weight: bold; }
+    .section-box { background: #ffffff; border: 1px solid #dee2e6; padding: 20px; border-radius: 8px; margin-top: 30px; }
+    .code-block { background: #f1f3f5; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
+    .progress-container { margin-bottom: 30px; }
+    .continue-btn { margin-top: 40px; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h2 class="mb-4">Deployment Phase: Cloud Security Review</h2>
 
-    <div class="section mb-4">
-      <h5>1. Upload Configuration or Connect Cloud</h5>
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar p-4">
+    <h4 class="text-white mb-4">ArmorSDLC</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="02_dashboard.html">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="03_create_project.html">Create Project</a></li>
+      <li class="nav-item"><a class="nav-link" href="05b_development.html">Development Phase</a></li>
+      <li class="nav-item"><a class="nav-link" href="05c_testing.html">Testing Phase</a></li>
+      <li class="nav-item"><a class="nav-link active" href="05d_deployment.html">Deployment Phase</a></li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-grow-1 p-5">
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress" style="height: 8px;">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <p class="text-muted small mt-2">Step 4 of 4: Deployment Phase (Cloud and Infrastructure Security)</p>
+    </div>
+
+    <h2 class="mb-4">Deployment Review with Context Awareness</h2>
+
+    <!-- Context Overview -->
+    <div class="section-box">
+      <h5>Context Overview</h5>
+      <p class="mb-1">- Prioritized Components: PaymentService, AuthService, SearchService</p>
+      <p class="text-muted small mb-0">Infrastructure checks are prioritized based on earlier threats and vulnerabilities discovered during design, development, and testing phases.</p>
+    </div>
+
+    <!-- Configuration Setup -->
+    <div class="section-box">
+      <h5>Upload Infrastructure Configuration</h5>
       <form>
         <div class="mb-3">
-          <label class="form-label">Upload Deployment Configuration (YAML/JSON):</label>
-          <input type="file" class="form-control mb-2" required>
+          <label for="configUpload" class="form-label">Upload Cloud Config (JSON/YAML)</label>
+          <input type="file" class="form-control" id="configUpload" accept=".json,.yaml,.yml">
         </div>
         <div class="mb-3">
-          <label class="form-label">Or simulate cloud connection:</label>
-          <input type="text" class="form-control" placeholder="cloud-account-id-123" />
+          <p class="text-center mb-2">or</p>
+          <a href="#" class="btn btn-outline-primary">
+            <i class="bi bi-cloud-upload"></i> Connect Cloud Account
+          </a>
         </div>
-        <button type="submit" class="btn btn-orange">Run Security Checks</button>
       </form>
     </div>
 
-    <div class="section">
-      <h5>2. Configuration Issues Detected</h5>
+    <!-- Scan Results -->
+    <div class="section-box mt-5">
+      <h4 class="mb-4">Deployment Scan Results</h4>
 
-      <!-- Public S3 -->
-      <div class="issue-box">
-        <strong>Issue:</strong> Public S3 Bucket<br/>
-        <strong>Resource:</strong> s3://user-backups<br/>
-        <strong>Severity:</strong> Critical<br/>
-        <strong>Fix:</strong> Set bucket access to private using AWS IAM policies or S3 block public access.
-        <div class="ref-list">
-          <strong>References:</strong>
-          <ul>
-            <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html" target="_blank">AWS: Block Public Access to S3</a></li>
-            <li><a href="https://owasp.org/www-project-cloud-security/" target="_blank">OWASP Cloud-Native Security Top 10</a></li>
-          </ul>
-        </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Service</th>
+              <th>Issue Detected</th>
+              <th>Linked Component</th>
+              <th>Linked Threat</th>
+              <th>Severity</th>
+              <th>Suggested Remediation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AWS S3</td>
+              <td>Public bucket accessible to internet</td>
+              <td>PaymentService</td>
+              <td>Information Disclosure</td>
+              <td><span class="badge bg-danger">High</span></td>
+              <td>Set S3 bucket permissions to private and use IAM roles.</td>
+            </tr>
+            <tr>
+              <td>AWS IAM</td>
+              <td>Over-permissive admin policy attached</td>
+              <td>AuthService</td>
+              <td>Spoofing</td>
+              <td><span class="badge bg-danger">High</span></td>
+              <td>Apply least privilege principle; review IAM roles and scopes.</td>
+            </tr>
+            <tr>
+              <td>API Gateway</td>
+              <td>API endpoint missing OAuth authentication</td>
+              <td>AuthService</td>
+              <td>Tampering</td>
+              <td><span class="badge bg-warning text-dark">Medium</span></td>
+              <td>Enforce OAuth 2.0 authentication on all APIs.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- Overly Permissive IAM -->
-      <div class="issue-box">
-        <strong>Issue:</strong> Overly Permissive IAM Policy<br/>
-        <strong>Resource:</strong> AdminPolicy<br/>
-        <strong>Severity:</strong> High<br/>
-        <strong>Fix:</strong> Follow the principle of least privilege — remove wildcard actions and unused services.
-        <div class="ref-list">
-          <strong>References:</strong>
-          <ul>
-            <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">AWS IAM Best Practices</a></li>
-            <li><a href="https://owasp.org/www-project-cloud-security/" target="_blank">OWASP: IAM Risks in Cloud</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- SSH Port Exposure -->
-      <div class="issue-box">
-        <strong>Issue:</strong> SSH Port Open to Public<br/>
-        <strong>Resource:</strong> 0.0.0.0/0 on Port 22<br/>
-        <strong>Severity:</strong> High<br/>
-        <strong>Fix:</strong> Limit SSH access to trusted IPs, use VPN or jump hosts, disable root login.
-        <div class="ref-list">
-          <strong>References:</strong>
-          <ul>
-            <li><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html" target="_blank">AWS EC2: Key Pairs & SSH</a></li>
-            <li><a href="https://www.ssh.com/academy/ssh/security-best-practices" target="_blank">SSH Security Best Practices</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="text-end mt-4">
-        <a href="04_phase_selector.html" class="btn btn-outline-secondary">← Back</a>
-        <a href="07_summary.html" class="btn btn-orange">Finish & View Summary →</a>
-      </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Reference Section -->
+    <div class="section-box mt-5">
+      <h5>References and Best Practices</h5>
+      <ul>
+        <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html" target="_blank">AWS S3 Security Best Practices</a></li>
+        <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">IAM Best Practices</a></li>
+        <li><a href="https://oauth.net/2/" target="_blank">OAuth 2.0 Protocol</a></li>
+      </ul>
+    </div>
+
+    <!-- Finish Button -->
+    <div class="text-end continue-btn">
+      <a href="07_summary.html" class="btn btn-success btn-lg">Finish and View Summary Report →</a>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
