@@ -11,7 +11,7 @@
     .sidebar { width: 250px; height: 100vh; background-color: #212529; }
     .sidebar a { color: #adb5bd; text-decoration: none; }
     .sidebar a:hover, .sidebar a.active { color: #ffffff; font-weight: bold; }
-    .metadata-box { background: #ffffff; border: 1px solid #dee2e6; padding: 20px; border-radius: 8px; margin-top: 30px; }
+    .metadata-box, .upload-box { background: #ffffff; border: 1px solid #dee2e6; padding: 20px; border-radius: 8px; margin-top: 30px; }
     .code-block { background: #f1f3f5; padding: 15px; border-radius: 5px; font-family: monospace; overflow-x: auto; }
     .progress-container { margin-bottom: 30px; }
     .continue-btn { margin-top: 40px; }
@@ -49,6 +49,24 @@
       <h5>Context Overview</h5>
       <p class="mb-1">- Linked Design Threats: Spoofing (AuthService), Tampering (PaymentService)</p>
       <p class="text-muted small mb-0">Scan results prioritize code connected to critical components identified earlier.</p>
+    </div>
+
+    <!-- Upload or Connect Section -->
+    <div class="upload-box mt-5">
+      <h5 class="mb-4">Provide Your Source Code</h5>
+      <div class="row g-3">
+        <div class="col-md-6 text-center">
+          <label class="form-label">Upload Code Archive (.zip / .tar.gz)</label>
+          <input class="form-control" type="file" accept=".zip,.tar.gz">
+        </div>
+        <div class="col-md-6 text-center d-flex flex-column justify-content-center">
+          <p class="mb-2">or</p>
+          <a href="#" class="btn btn-outline-primary">
+            <i class="bi bi-github"></i> Connect to GitHub
+          </a>
+        </div>
+      </div>
+      <p class="text-muted small mt-2 text-center">We prioritize security. Uploaded code is deleted after analysis.</p>
     </div>
 
     <!-- Vulnerabilities Table -->
