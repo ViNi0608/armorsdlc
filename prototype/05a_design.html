@@ -1,70 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Design Phase - ArmorSDLC</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>Design Phase – ArmorSDLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <style>
-    body { background-color: #f8f9fa; font-family: 'Segoe UI', sans-serif; }
-    .section { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04); }
-    .threat-box { border-left: 4px solid #ff6a00; padding: 1rem; margin-bottom: 1.5rem; background: #fffdf9; }
-    .threat-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .btn-orange { background-color: #ff6a00; color: #fff; }
-    .btn-orange:hover { background-color: #e65c00; }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #f9fafb; }
+    .sidebar { width: 250px; height: 100vh; background-color: #212529; }
+    .sidebar a { color: #adb5bd; text-decoration: none; }
+    .sidebar a:hover, .sidebar a.active { color: #ffffff; font-weight: bold; }
+    .dropzone { border: 2px dashed #6c757d; padding: 40px; text-align: center; background-color: #fff; border-radius: 10px; }
+    .metadata-box { background: #ffffff; border: 1px solid #dee2e6; padding: 20px; border-radius: 8px; margin-top: 30px; }
+    .progress-container { margin-bottom: 30px; }
+    .continue-btn { margin-top: 30px; }
+    .table-hover tbody tr:hover { background-color: #f1f3f5; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h2 class="mb-4">Design Phase: Automated Threat Modeling</h2>
 
-    <div class="section mb-4">
-      <h5>1. Upload Architecture File</h5>
-      <p class="text-muted mb-3">Supported formats: JSON, XML, PNG (e.g., draw.io export)</p>
-      <form>
-        <input type="file" class="form-control mb-3" required>
-        <button type="submit" class="btn btn-orange">Run Threat Analysis</button>
-      </form>
-    </div>
-
-    <div class="section">
-      <h5>2. STRIDE-Based Threat Report</h5>
-      <p class="text-muted">Below are the detected risks with their classification and recommendations:</p>
-
-      <div class="threat-box">
-        <div class="threat-title">🟠 Risk: Unauthenticated API Access</div>
-        <ul class="mb-1">
-          <li><strong>STRIDE Category:</strong> Spoofing</li>
-          <li><strong>Impact:</strong> External attackers can impersonate users</li>
-          <li><strong>Mitigation:</strong> Enforce OAuth 2.0, implement access tokens, and audit API logs</li>
-        </ul>
-      </div>
-
-      <div class="threat-box">
-        <div class="threat-title">🟡 Risk: Secrets Stored in Diagrams</div>
-        <ul class="mb-1">
-          <li><strong>STRIDE Category:</strong> Information Disclosure</li>
-          <li><strong>Impact:</strong> Leaked credentials or keys visible to unauthorized viewers</li>
-          <li><strong>Mitigation:</strong> Externalize secrets to a vault (AWS Secrets Manager, HashiCorp Vault)</li>
-        </ul>
-      </div>
-
-      <div class="threat-box">
-        <div class="threat-title">🟣 Risk: Missing Data Flow Encryption</div>
-        <ul class="mb-1">
-          <li><strong>STRIDE Category:</strong> Tampering</li>
-          <li><strong>Impact:</strong> Data may be intercepted or modified during transmission</li>
-          <li><strong>Mitigation:</strong> Enforce TLS 1.2+, disable insecure cipher suites</li>
-        </ul>
-      </div>
-
-      <div class="text-end mt-4">
-        <a href="04_phase_selector.html" class="btn btn-outline-secondary">← Back</a>
-        <a href="05b_development.html" class="btn btn-orange">Mark as Reviewed →</a>
-      </div>
-    </div>
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div class="sidebar p-4">
+    <h4 class="text-white mb-4">ArmorSDLC</h4>
+    <ul class="nav flex-column">
+      <li class="nav-item"><a class="nav-link" href="02_dashboard.html">Dashboard</a></li>
+      <li class="nav-item"><a class="nav-link" href="03_create_project.html">Create Project</a></li>
+      <li class="nav-item"><a class="nav-link active" href="05a_design.html">Design Phase</a></li>
+      <li class="nav-item"><a class="nav-link" href="06_my_projects.html">My Projects</a></li>
+    </ul>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Main Content -->
+  <div class="flex-grow-1 p-5">
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress" style="height: 8px;">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <p class="text-muted small mt-2">Step 1 of 4: Design Phase (Threat Modeling)</p>
+    </div>
+
+    <h2 class="mb-4">Upload Your Application Design</h2>
+
+    <!-- Upload Area -->
+    <div class="dropzone mb-5">
+      <i class="bi bi-cloud-upload display-4 text-secondary"></i>
+      <p class="lead mt-3 mb-1">Drag & Drop your architecture file here</p>
+      <p class="text-muted small">or click below to browse supported formats (JSON, OTM, PNG)</p>
+      <input class="form-control mt-3" type="file" id="designFile" accept=".json,.xml,.png,.jpg" />
+    </div>
+
+    <!-- Metadata Context Summary -->
+    <div class="metadata-box">
+      <h5 class="mb-3">🧠 Detected Components & Linked Threats (Context Metadata)</h5>
+      <ul class="list-unstyled mb-0">
+        <li><strong>AuthService</strong> → Spoofing, Repudiation</li>
+        <li><strong>PaymentService</strong> → Tampering, Information Disclosure</li>
+        <li><strong>NotificationService</strong> → Denial of Service (DoS)</li>
+      </ul>
+      <p class="text-muted small mt-2">This metadata will drive code scanning, testing and deployment checks intelligently.</p>
+    </div>
+
+    <!-- Threat Modeling Table -->
+    <div class="mt-5">
+      <h4 class="mb-3">Threat Modeling Insights</h4>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>Component</th>
+              <th>Identified Threats</th>
+              <th>Suggested Mitigation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>AuthService</td>
+              <td>Spoofing, Repudiation</td>
+              <td>Implement OAuth 2.0 authentication and auditing logs.</td>
+            </tr>
+            <tr>
+              <td>PaymentService</td>
+              <td>Tampering, Information Disclosure</td>
+              <td>Encrypt transactions, validate all inputs, enforce strict data access.</td>
+            </tr>
+            <tr>
+              <td>NotificationService</td>
+              <td>Denial of Service (DoS)</td>
+              <td>Apply rate limiting, API gateway protections, input validation.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Continue Button -->
+    <div class="text-end continue-btn">
+      <a href="05b_development.html" class="btn btn-primary btn-lg">Continue to Development Phase →</a>
+    </div>
+
+  </div>
+</div>
+
 </body>
 </html>
