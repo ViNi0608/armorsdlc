@@ -1,263 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Fintech App – Full Security Report</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <title>ArmorSDLC - Full Application Security Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background-color: #fff; color: #212529; }
-    h1, h2, h3 { color: #ff6a00; }
-    .section { padding-top: 40px; padding-bottom: 30px; border-bottom: 1px solid #dee2e6; }
-    .issue-block { background: #f9f9f9; padding: 20px; border-left: 5px solid #ff6a00; border-radius: 5px; margin-bottom: 25px; }
-    .code-block { background: #f0f0f0; padding: 10px; border-radius: 4px; font-family: monospace; }
-    .ref-list ul { padding-left: 1rem; }
-    .badge-open { background-color: #fff3cd; color: #664d03; }
-    .badge-fixed { background-color: #d1e7dd; color: #0f5132; }
-    .badge-critical { background-color: #f8d7da; color: #842029; }
-    .conf-note { font-size: 0.85rem; color: #6c757d; margin-top: 40px; }
-    .page-break { page-break-after: always; }
-    @media print { .no-print { display: none; } }
+    body { font-family: 'Segoe UI', sans-serif; background: #ffffff; padding: 40px; }
+    h1, h2, h3, h4, h5 { margin-top: 30px; }
+    .section { margin-bottom: 60px; }
+    .confidentiality { font-size: 0.9em; color: gray; text-align: center; margin-top: 20px; }
+    table { font-size: 0.95em; }
+    footer { font-size: 0.8em; text-align: center; margin-top: 80px; color: #6c757d; }
   </style>
 </head>
-<body class="container py-4">
+<body>
 
-  <!-- HEADER -->
-  <header class="text-center mb-4">
-    <h1>ArmorSDLC – Security Report</h1>
-    <h5 class="text-muted">Application: My Fintech App</h5>
-    <p>Generated: <script>document.write(new Date().toLocaleDateString());</script></p>
-  </header>
+<!-- Cover Page -->
+<div class="text-center">
+  <h1><strong>ArmorSDLC</strong></h1>
+  <h2>Full Application Security Report</h2>
+  <p class="text-muted">Project: <strong>My Fintech App</strong></p>
+  <p class="confidentiality">Confidential Document – For Authorized Use Only</p>
+  <p class="text-muted mt-4">Generated on: 26 April 2025</p>
+</div>
 
-  <!-- EXECUTIVE SUMMARY -->
-  <section class="section" id="executive-summary">
-    <h2>Executive Summary</h2>
-    <ul>
-      <li><strong>Total Issues:</strong> 9</li>
-      <li><strongSeverity Distribution:</strong> Critical: 1, High: 4, Medium: 4</li>
-      <li><strong>Overall Security Posture:</strong> ⚠️ Moderate – Immediate remediation required</li>
-      <li><strong>Compliance Risk:</strong> PCI DSS, SOC 2 impacted due to exploitable flaws</li>
-    </ul>
-  </section>
+<!-- 1. Confidentiality Notice -->
+<div class="section">
+  <h2>1. Confidentiality Notice</h2>
+  <p>This document contains confidential and privileged information intended solely for authorized parties of My Fintech App and ArmorSDLC. Distribution or disclosure without prior written permission is prohibited. Handle with utmost care and integrity.</p>
+</div>
+<!-- 2. Executive Summary -->
+<div class="section">
+  <h2>2. Executive Summary</h2>
+  <p>ArmorSDLC conducted a context-aware, full-SDLC security assessment for My Fintech App. Using phase-linked intelligence from design through deployment, vulnerabilities were identified, prioritized, and remediated. 
+  Overall application security posture improved to meet compliance standards (PCI DSS, HIPAA, SOC 2).</p>
+</div>
 
-  <!-- TABLE OF CONTENTS -->
-  <section class="section" id="toc">
-    <h2>Table of Contents</h2>
-    <ol>
-      <li><a href="#vulnerability-table">Vulnerability Table</a></li>
-      <li><a href="#design">Design Phase</a></li>
-      <li><a href="#development">Development Phase</a></li>
-      <li><a href="#testing">Testing Phase</a></li>
-      <li><a href="#deployment">Deployment Phase</a></li>
-      
-      <li><a href="#references">References</a></li>
-    </ol>
-  </section>
-  <!-- VULNERABILITY SUMMARY TABLE -->
-<section class="section" id="vulnerability-table">
-  <h2>Vulnerability Summary Table</h2>
+<!-- Table of Contents -->
+<div class="section">
+  <h2>3. Table of Contents</h2>
+  <ol>
+    <li>Confidentiality Notice</li>
+    <li>Executive Summary</li>
+    <li>Risk Overview</li>
+    <li>Design Phase Findings</li>
+    <li>Development Phase Findings</li>
+    <li>Testing Phase Findings</li>
+    <li>Deployment Phase Findings</li>
+    <li>Remediation Actions Summary</li>
+    <li>Risk Distribution Charts</li>
+    <li>References</li>
+  </ol>
+</div>
+
+<!-- 4. Risk Overview -->
+<div class="section">
+  <h2>4. Risk Overview</h2>
   <table class="table table-bordered">
     <thead class="table-light">
       <tr>
         <th>Phase</th>
+        <th>Vulnerabilities Detected</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Design</td><td>Spoofing, Tampering, Info Disclosure</td><td>High</td><td>Addressed</td></tr>
+      <tr><td>Development</td><td>Hardcoded Creds, SQLi</td><td>High</td><td>Auto-Fixed</td></tr>
+      <tr><td>Testing</td><td>XSS, Open Redirect, Param Tampering</td><td>High</td><td>Fixed</td></tr>
+      <tr><td>Deployment</td><td>S3 Public Access, IAM Over-Permissions</td><td>High</td><td>Fixed</td></tr>
+    </tbody>
+  </table>
+
+  <div class="text-center mt-5">
+    <canvas id="riskChart" style="max-width:400px; margin:auto;"></canvas>
+  </div>
+</div>
+<!-- 5. Design Phase Findings -->
+<div class="section">
+  <h2>5. Design Phase Findings</h2>
+
+  <h4>5.1 Threat Modeling Summary</h4>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Component</th>
+        <th>Threat Type (STRIDE)</th>
+        <th>Risk Level</th>
+        <th>Suggested Mitigation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>AuthService</td>
+        <td>Spoofing</td>
+        <td>High</td>
+        <td>Implement OAuth 2.0 authentication framework</td>
+      </tr>
+      <tr>
+        <td>PaymentService</td>
+        <td>Tampering</td>
+        <td>High</td>
+        <td>Enforce strict server-side input validation and data integrity checks</td>
+      </tr>
+      <tr>
+        <td>SearchService</td>
+        <td>Information Disclosure</td>
+        <td>Medium</td>
+        <td>Limit detailed error messages and secure API outputs</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 class="mt-5">5.2 Threat Model Diagram</h4>
+  <p class="text-muted">Architecture Threat Model (Sample representation):</p>
+  <div class="text-center">
+    <img src="https://i.postimg.cc/ht541ydj/image.png" alt="Threat Model Diagram" style="max-width:600px;" class="img-fluid border rounded">
+  </div>
+
+  <p class="mt-3"><strong>Context Awareness:</strong> Design Phase findings were used to drive deeper code and runtime testing in later phases. 
+  For example, detected Spoofing threats informed login brute force testing, and Tampering risks influenced payment validation scans.</p>
+</div>
+<!-- 6. Development Phase Findings -->
+<div class="section">
+  <h2>6. Development Phase Findings</h2>
+
+  <h4>6.1 Uploaded Repositories/Files</h4>
+  <ul>
+    <li><strong>auth.js</strong> — Authentication service module</li>
+    <li><strong>paymentController.js</strong> — Payment processing logic</li>
+  </ul>
+
+  <h4 class="mt-5">6.2 Vulnerabilities & Auto-Fix Summaries</h4>
+
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>File</th>
+        <th>Vulnerability</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>auth.js</td>
+        <td>Hardcoded Credentials</td>
+        <td>High</td>
+        <td>Auto-Fixed</td>
+      </tr>
+      <tr>
+        <td>paymentController.js</td>
+        <td>SQL Injection Possibility</td>
+        <td>High</td>
+        <td>Auto-Fixed</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 class="mt-5">6.3 Detailed Examples</h4>
+
+  <div class="border p-3 mb-4">
+    <strong>Vulnerability:</strong> Hardcoded Credentials in <code>auth.js</code><br><br>
+    <strong>Original Code:</strong>
+    <pre><code>const password = "admin123";</code></pre>
+
+    <strong>Auto-Fixed Code:</strong>
+    <pre><code>const password = process.env.AUTH_PASSWORD;</code></pre>
+
+    <strong>Fix Explanation:</strong> Moved sensitive information to environment variables using secure vault integration to prevent credential leakage.
+  </div>
+
+  <div class="border p-3 mb-4">
+    <strong>Vulnerability:</strong> SQL Injection Risk in <code>paymentController.js</code><br><br>
+    <strong>Original Code:</strong>
+    <pre><code>const query = "SELECT * FROM payments WHERE id = " + paymentId;</code></pre>
+
+    <strong>Auto-Fixed Code:</strong>
+    <pre><code>const query = "SELECT * FROM payments WHERE id = ?"; db.execute(query, [paymentId]);</code></pre>
+
+    <strong>Fix Explanation:</strong> Replaced dynamic query concatenation with prepared statements to prevent SQL Injection attacks.
+  </div>
+
+  <p><strong>Context Awareness:</strong>  
+  Development Phase scanning prioritized code areas linked to earlier STRIDE-identified threats such as Spoofing (AuthService) and Tampering (PaymentService).</p>
+</div>
+<!-- 7. Testing Phase Findings -->
+<div class="section">
+  <h2>7. Testing Phase Findings</h2>
+
+  <h4>7.1 DAST Testing Scope</h4>
+  <ul>
+    <li>Authenticated Scans: Enabled (user creds provided)</li>
+    <li>Application Description Used: Logic-Aware Testing activated</li>
+  </ul>
+
+  <h4 class="mt-5">7.2 Vulnerabilities Detected</h4>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>URL Tested</th>
+        <th>Vulnerability</th>
+        <th>Severity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>https://myfintechapp.com/search?query=test</td>
+        <td>Reflected Cross-Site Scripting (XSS)</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
+      <tr>
+        <td>https://myfintechapp.com/login?redirect=http://evil.com</td>
+        <td>Open Redirect</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
+      <tr>
+        <td>https://myfintechapp.com/payment</td>
+        <td>Parameter Tampering</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 class="mt-5">7.3 Detailed Findings</h4>
+
+  <div class="border p-3 mb-4">
+    <strong>URL:</strong> /search?query=test<br><br>
+    <strong>Issue:</strong> Reflected XSS<br>
+    <strong>Remediation:</strong> Applied strict output encoding using DOMPurify.<br>
+    <strong>Context:</strong> This testing was prioritized because 'Information Disclosure' threats were found during Design Phase.
+  </div>
+
+  <div class="border p-3 mb-4">
+    <strong>URL:</strong> /login?redirect=http://evil.com<br><br>
+    <strong>Issue:</strong> Open Redirect<br>
+    <strong>Remediation:</strong> Enforced strict redirect whitelisting.<br>
+    <strong>Context:</strong> This flaw was targeted based on Spoofing threats mapped during Design Phase.
+  </div>
+
+  <div class="border p-3 mb-4">
+    <strong>URL:</strong> /payment<br><br>
+    <strong>Issue:</strong> Parameter Tampering<br>
+    <strong>Remediation:</strong> Server-side strict parameter validation implemented.<br>
+    <strong>Context:</strong> Identified because Tampering threats were highlighted for PaymentService in Threat Modeling.
+  </div>
+
+</div>
+<!-- 8. Deployment Phase Findings -->
+<div class="section">
+  <h2>8. Deployment Phase Findings</h2>
+
+  <h4>8.1 Cloud Configuration Review</h4>
+  <ul>
+    <li>AWS Account connected: Scan completed on IAM, S3, API Gateway.</li>
+    <li>Deployment Architecture: Serverless (Lambda), APIs, S3 Buckets.</li>
+  </ul>
+
+  <h4 class="mt-5">8.2 Deployment Vulnerabilities</h4>
+  <table class="table table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>Asset</th>
         <th>Issue</th>
         <th>Severity</th>
         <th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Design</td><td>Unauthenticated API</td><td>High</td><td><span class="badge badge-fixed">Reviewed</span></td></tr>
-      <tr><td>Development</td><td>Hardcoded Password</td><td>High</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
-      <tr><td>Development</td><td>Reflected XSS</td><td>Medium</td><td><span class="badge badge-fixed">Fixed</span></td></tr>
-      <tr><td>Testing</td><td>XSS in Search</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Testing</td><td>Open Redirect</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Testing</td><td>Coupon Logic Flaw</td><td>Medium</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>Public S3</td><td>Critical</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>IAM Wildcard</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
-      <tr><td>Deployment</td><td>SSH Open Access</td><td>High</td><td><span class="badge badge-open">Open</span></td></tr>
+      <tr>
+        <td>AWS S3 Bucket: myfintechapp-userfiles</td>
+        <td>Public Read Access Enabled</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
+      <tr>
+        <td>AWS IAM Role: AdminRole</td>
+        <td>Overly Broad Permissions</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
+      <tr>
+        <td>API Gateway: /login endpoint</td>
+        <td>Missing OAuth 2.0 Authorization</td>
+        <td>High</td>
+        <td>Fixed</td>
+      </tr>
     </tbody>
   </table>
-</section>
 
-<!-- DESIGN PHASE -->
-<section class="section" id="design">
-  <h2>Design Phase</h2>
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Unauthenticated API Access</p>
-    <p><strong>File:</strong> <code>architecture.json</code></p>
-    <p><strong>Threat Model:</strong> STRIDE → Tampering, Information Disclosure</p>
-    <p><strong>Mitigation:</strong> Enforce OAuth 2.0 authentication and token verification for all API endpoints.</p>
-    <p><strong>Status:</strong> Reviewed</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <h4 class="mt-5">8.3 Detailed Findings</h4>
 
-<!-- DEVELOPMENT PHASE -->
-<section class="section" id="development">
-  <h2>Development Phase</h2>
-
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Hardcoded Password</p>
-    <p><strong>File:</strong> <code>auth/login.js</code></p>
-    <p><strong>Severity:</strong> High</p>
-    <p><strong>Auto-fix Applied:</strong></p>
-    <div class="code-block">
-      - const password = "admin123";<br>
-      + const password = process.env.ADMIN_PASS;
-    </div>
-    <p><strong>Explanation:</strong> Hardcoded credentials are easily exposed in source code. Use secure environment variables to protect secrets.</p>
-    <p><strong>Status:</strong> Fixed</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://owasp.org/www-project-proactive-controls/#C6">OWASP C6 – Secure Credential Handling</a></li>
-      </ul>
-    </div>
+  <div class="border p-3 mb-4">
+    <strong>Asset:</strong> S3 Bucket (userfiles)<br><br>
+    <strong>Issue:</strong> Public access enabled exposing user data.<br>
+    <strong>Remediation:</strong> Access restricted to private access only.<br>
+    <strong>Context:</strong> Design Phase identified sensitive assets (user data) needing protection.
   </div>
 
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Reflected XSS</p>
-    <p><strong>File:</strong> <code>views/profile.ejs</code></p>
-    <p><strong>Severity:</strong> Medium</p>
-    <p><strong>Auto-fix Applied:</strong></p>
-    <div class="code-block">
-      - &lt;%= username %&gt;<br>
-      + &lt;%= DOMPurify.sanitize(username) %&gt;
-    </div>
-    <p><strong>Explanation:</strong> Output is unescaped. Using sanitization libraries prevents reflected injection attacks.</p>
-    <p><strong>Status:</strong> Fixed</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://portswigger.net/web-security/cross-site-scripting">PortSwigger XSS Guide</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-<!-- TESTING PHASE -->
-<section class="section" id="testing">
-  <h2>Testing Phase</h2>
-
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Stored XSS in Search Bar</p>
-    <p><strong>Endpoint:</strong> <code>/search?q=&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
-    <p><strong>Severity:</strong> High</p>
-    <p><strong>Fix:</strong> Sanitize user input and use output encoding. Implement CSP (Content Security Policy).</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://owasp.org/www-community/attacks/xss/">OWASP XSS</a></li>
-      </ul>
-    </div>
+  <div class="border p-3 mb-4">
+    <strong>Asset:</strong> IAM Role (AdminRole)<br><br>
+    <strong>Issue:</strong> Full Admin privileges assigned unnecessarily.<br>
+    <strong>Remediation:</strong> Enforced Principle of Least Privilege.<br>
+    <strong>Context:</strong> Based on least-trust boundaries established during threat modeling.
   </div>
 
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Open Redirect</p>
-    <p><strong>Endpoint:</strong> <code>/redirect?url=http://evil.com</code></p>
-    <p><strong>Severity:</strong> Medium</p>
-    <p><strong>Fix:</strong> Whitelist redirect domains or validate destination with redirect tokens.</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://portswigger.net/web-security/open-redirect">PortSwigger – Open Redirect</a></li>
-      </ul>
-    </div>
+  <div class="border p-3 mb-4">
+    <strong>Asset:</strong> API Gateway (/login)<br><br>
+    <strong>Issue:</strong> No authentication layer.<br>
+    <strong>Remediation:</strong> OAuth 2.0 integrated to secure endpoint.<br>
+    <strong>Context:</strong> Threat Modeling flagged Spoofing risks.
   </div>
 
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Logic Flaw – Reusable Promo Code</p>
-    <p><strong>Endpoint:</strong> <code>/apply-coupon?code=WELCOME100</code></p>
-    <p><strong>Severity:</strong> Medium</p>
-    <p><strong>Fix:</strong> Bind promo code to unique user/session and expire after single use.</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://portswigger.net/web-security/business-logic">Business Logic Vulnerabilities</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
+</div>
+<!-- 9. Remediation Actions Summary -->
+<div class="section">
+  <h2>9. Remediation Actions Summary</h2>
 
-<!-- DEPLOYMENT PHASE -->
-<section class="section" id="deployment">
-  <h2>Deployment Phase</h2>
+  <p><strong>Total Vulnerabilities Found:</strong> 10</p>
+  <p><strong>Vulnerabilities Auto-Fixed:</strong> 4 (Core code-level vulnerabilities)</p>
+  <p><strong>Vulnerabilities Manually Fixed:</strong> 6 (Including cloud posture and DAST findings)</p>
 
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Public S3 Bucket</p>
-    <p><strong>Resource:</strong> <code>s3://user-backups</code></p>
-    <p><strong>Severity:</strong> Critical</p>
-    <p><strong>Fix:</strong> Block all public access and enforce IAM policies for controlled access.</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS: S3 Public Access</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="issue-block">
-    <p><strong>Issue:</strong> Over-permissive IAM Role</p>
-    <p><strong>Resource:</strong> <code>IAM: AdminWildcard</code></p>
-    <p><strong>Severity:</strong> High</p>
-    <p><strong>Fix:</strong> Use least privilege. Replace wildcards with exact permissions.</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM Best Practices</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="issue-block">
-    <p><strong>Issue:</strong> SSH Open to World</p>
-    <p><strong>Resource:</strong> <code>Firewall: 0.0.0.0/0 → Port 22</code></p>
-    <p><strong>Severity:</strong> High</p>
-    <p><strong>Fix:</strong> Restrict access by IP, use VPN or bastion hosts.</p>
-    <p><strong>Status:</strong> Open</p>
-    <div class="ref-list">
-      <strong>References:</strong>
-      <ul>
-        <li><a href="https://www.ssh.com/academy/ssh/security-best-practices">SSH Security Best Practices</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-<!-- REFERENCES -->
-<section class="section" id="references">
-  <h2>References</h2>
+  <p class="mt-3"><strong>Auto-Fix Highlight:</strong></p>
   <ul>
-    <li><a href="https://owasp.org/www-project-threat-modeling/">OWASP Threat Modeling</a></li>
-    <li><a href="https://owasp.org/www-project-proactive-controls/#C6">OWASP C6 – Secure Credential Handling</a></li>
-    <li><a href="https://portswigger.net/web-security/cross-site-scripting">PortSwigger – Reflected & Stored XSS</a></li>
-    <li><a href="https://portswigger.net/web-security/open-redirect">PortSwigger – Open Redirect</a></li>
-    <li><a href="https://portswigger.net/web-security/business-logic">PortSwigger – Business Logic Flaws</a></li>
-    <li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html">AWS: Block Public S3 Access</a></li>
-    <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html">AWS IAM Best Practices</a></li>
-    <li><a href="https://www.ssh.com/academy/ssh/security-best-practices">SSH.com – Best Practices</a></li>
+    <li><strong>Hardcoded Credentials:</strong> Moved to secure vault (Development Phase)</li>
+    <li><strong>SQL Injection:</strong> Replaced concatenated queries with parameterized statements</li>
   </ul>
-</section>
 
-<!-- PRINT TO PDF BUTTON -->
-<div class="text-center my-5 no-print">
-  <button onclick="window.print()" class="btn btn-outline-primary">🖨️ Print / Save as PDF</button>
+  <p><strong>Manual Remediation Highlight:</strong></p>
+  <ul>
+    <li><strong>S3 Bucket Public Access:</strong> Made private</li>
+    <li><strong>IAM Over-Permission:</strong> Least privilege applied</li>
+    <li><strong>XSS, Open Redirect, Param Tampering:</strong> Fixed through secure coding and server validation</li>
+  </ul>
 </div>
 
-<!-- CONFIDENTIALITY FOOTER -->
-<footer class="text-center text-muted conf-note">
-  This report is confidential and intended for internal use within My Fintech App’s security team. Do not share externally without prior approval.
+<!-- 10. Risk Distribution Charts -->
+<div class="section text-center">
+  <h2>10. Risk Distribution Charts</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Risk Severity Breakdown</h5>
+      <canvas id="severityChart" style="max-width:400px; margin:auto;"></canvas>
+    </div>
+    <div class="col-md-6">
+      <h5>Vulnerabilities by SDLC Phase</h5>
+      <canvas id="phaseChart" style="max-width:400px; margin:auto;"></canvas>
+    </div>
+  </div>
+</div>
+<!-- 11. References -->
+<div class="section">
+  <h2>11. References</h2>
+  <ul>
+    <li><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top 10 - Web Application Security Risks</a></li>
+    <li><a href="https://cwe.mitre.org/" target="_blank">MITRE CWE Database - Common Weakness Enumeration</a></li>
+    <li><a href="https://nvd.nist.gov/" target="_blank">NIST Vulnerability Database (NVD)</a></li>
+    <li><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html" target="_blank">AWS IAM Security Best Practices</a></li>
+  </ul>
+</div>
+
+<!-- Footer -->
+<footer class="mt-5 pt-4 border-top">
+  <p class="text-center small">
+    © 2025 ArmorSDLC - All Rights Reserved. | Confidential Document - For Authorized Viewers Only.
+  </p>
 </footer>
+
+<!-- Chart.js Scripts -->
+<script>
+  // Risk Severity Chart
+  const ctx1 = document.getElementById('severityChart').getContext('2d');
+  new Chart(ctx1, {
+    type: 'pie',
+    data: {
+      labels: ['High', 'Medium', 'Low'],
+      datasets: [{
+        label: 'Severity',
+        data: [8, 1, 1],
+        backgroundColor: ['#dc3545', '#ffc107', '#28a745'],
+        borderWidth: 1
+      }]
+    }
+  });
+
+  // Phase-wise Vulnerabilities Chart
+  const ctx2 = document.getElementById('phaseChart').getContext('2d');
+  new Chart(ctx2, {
+    type: 'bar',
+    data: {
+      labels: ['Design', 'Development', 'Testing', 'Deployment'],
+      datasets: [{
+        label: 'Vulnerabilities',
+        data: [3, 2, 3, 2],
+        backgroundColor: '#007bff'
+      }]
+    }
+  });
+</script>
 
 </body>
 </html>
